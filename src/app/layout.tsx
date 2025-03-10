@@ -1,36 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import AutoLogin from "@/shared/components/AutoLogin";
+import BottomNav from "@/widgets/BottomNav";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const viewport = {
+  themeColor: "#ffffff",
+};
 
 export const metadata: Metadata = {
   title: "Daily Retrospect App",
   description: "This is a PWA built with Next.js",
   manifest: "/manifest.json",
-  themeColor: "#000000",
 };
-// npm run build && npm run start
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className="overflow-auto">
+      <body className="antialiased flex justify-center items-center bg-white text-black min-h-screen">
+        <AutoLogin />
+        <div className="w-full max-w-[450px] flex flex-col min-h-screen relative">
+          <div className="flex-grow overflow-y-auto" style={{ maxHeight: 'calc(100vh - 56px)' }}>
+            {children}
+          </div>
+          <BottomNav />
+        </div>
       </body>
     </html>
   );

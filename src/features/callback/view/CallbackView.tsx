@@ -13,8 +13,8 @@ const CallbackView = () => {
       const idToken = params.get("idToken");
 
       if (accessToken && idToken) {
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("idToken", idToken);
+        localStorage.setItem("access_token", accessToken);
+        localStorage.setItem("id_token", idToken);
         router.push("/home");
       } else {
         console.error("토큰이 없습니다.");

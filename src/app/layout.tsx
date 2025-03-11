@@ -17,11 +17,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="overflow-auto">
-      <body className="antialiased flex justify-center items-center bg-white text-black min-h-screen">
+    <html lang="en" className="overflow-hidden">
+      <body className="antialiased flex justify-center items-center bg-white text-black min-h-screen overflow-hidden">
         <AutoLogin />
         <div className="w-full max-w-[450px] flex flex-col min-h-screen relative">
-          <div className="flex-grow overflow-y-auto" style={{ maxHeight: 'calc(100vh - 56px)' }}>
+          <div className="flex-grow border-t border-x border-b border-gray-200">
             {children}
           </div>
           <BottomNav />

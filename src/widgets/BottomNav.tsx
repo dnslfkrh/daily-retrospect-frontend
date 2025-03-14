@@ -15,9 +15,9 @@ const BottomNav = () => {
       <div className="grid grid-cols-3">
         <button
           className="w-full flex justify-center items-center py-6 text-gray-600 hover:text-black"
-          onClick={() => router.push("/write")}
+          onClick={() => router.push("/retrospect")}
         >
-          <span className="text-md">write</span>
+          <span className="text-md">retrospect</span>
         </button>
 
         <button

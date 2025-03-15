@@ -7,6 +7,11 @@ import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { fetchTodayRetrospect } from "../services/fetchTodayRetrospect";
+import Step1Mood from "./Steps/Step1Mood";
+import Step2Highlight from "./Steps/Step2Highlight";
+import Step3Keywords from "./Steps/Step3Keywords";
+import Step4Lesson from "./Steps/Step4Lesson";
+import Step5Comment from "./Steps/Step5Comment";
 
 export const RetrospectForm = () => {
   const [step, setStep] = useState<number | null>(null);
@@ -16,7 +21,7 @@ export const RetrospectForm = () => {
     setMood,
     setHighlight,
     setKeywords,
-    setResolution,
+    setLesson,
     setComment,
     setGoalProgress,
     setGoalFeedback,
@@ -35,18 +40,18 @@ export const RetrospectForm = () => {
         const data = await fetchTodayRetrospect();
         console.log("loadRetrospect: ", data);
 
-        const retrospect = data[0];
+        const retrospect = data;
 
         if (retrospect) {
           setMood(retrospect.mood);
           setHighlight(retrospect.highlight);
           setKeywords(retrospect.keywords);
-          setResolution(retrospect.resolution);
+          setLesson(retrospect.resolution);
           setComment(retrospect.comment);
-          setGoalProgress(retrospect.goalProgress);
-          setGoalFeedback(retrospect.goalFeedback);
+          setGoalProgress(retrospect.goal_progress);
+          setGoalFeedback(retrospect.goal_feedback);
 
-          if (retrospect.mood === null) {
+          if (!retrospect.mood) {
             setStep(1);
           } else if (!retrospect.highlight) {
             setStep(2);
@@ -73,7 +78,7 @@ export const RetrospectForm = () => {
     };
 
     checkRetrospect();
-  }, [router]);
+  }, []);
 
   const handleNext = () => {
     setStep((prev) => (prev !== null ? prev + 1 : 1));
@@ -85,10 +90,10 @@ export const RetrospectForm = () => {
         {step === 1 && <Step1Mood onNext={handleNext} />}
         {step === 2 && <Step2Highlight onNext={handleNext} />}
         {step === 3 && <Step3Keywords onNext={handleNext} />}
-        {step === 4 && <Step4Resolution onNext={handleNext} />}
+        {step === 4 && <Step4Lesson onNext={handleNext} />}
         {step === 5 && <Step5Comment onNext={handleNext} />}
-        {step === 6 && <Step6GoalProgress onNext={handleNext} />}
-        {step === 7 && <Step7GoalFeedback />}
+        {/* {step === 6 && <Step6GoalProgress onNext={handleNext} />}
+        {step === 7 && <Step7GoalFeedback />} */}
       </AnimatePresence>
     </FullHeightContainer>
   );

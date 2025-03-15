@@ -7,7 +7,7 @@ interface RetrospectState {
   mood: string;
   highlight: string;
   keywords: string[];
-  resolution: string;
+  lesson: string;
   comment: string;
   goalId: number | null;
   goalProgress: GoalPregress;
@@ -16,7 +16,7 @@ interface RetrospectState {
   setMood: (mood: string) => void;
   setHighlight: (highlight: string) => void;
   setKeywords: (keyword: string[]) => void;
-  setResolution: (resolution: string) => void;
+  setLesson: (resolution: string) => void;
   setComment: (comment: string) => void;
   setGoalId: (goal_id: number) => void;
   setGoalProgress: (goal_progress: GoalPregress) => void;
@@ -29,7 +29,7 @@ export const useRetrospectStore = create<RetrospectState>((set) => ({
   mood: "",
   highlight: "",
   keywords: [],
-  resolution: "",
+  lesson: "",
   comment: "",
   goalId: null,
   goalProgress: null,
@@ -38,7 +38,7 @@ export const useRetrospectStore = create<RetrospectState>((set) => ({
   setMood: (mood) => set({ mood }),
   setHighlight: (highlight) => set({ highlight }),
   setKeywords: (keywords) => set({ keywords }),
-  setResolution: (resolution) => set({ resolution }),
+  setLesson: (lesson) => set({ lesson }),
   setComment: (comment) => set({ comment }),
   setGoalId: (goalId) => set({ goalId }),
   setGoalProgress: (goalProgress) => set({ goalProgress }),
@@ -49,7 +49,7 @@ export const useRetrospectStore = create<RetrospectState>((set) => ({
     mood: "",
     highlight: "",
     keywords: [],
-    resolution: "",
+    lesson: "",
     comment: "",
     goalId: null,
     goalProgress: null,

@@ -2,7 +2,7 @@
 
 import { useLoadingStore } from "../store/useLoading.store";
 
-export const Loading = () => {
+const Loading = () => {
   const { isLoading } = useLoadingStore();
 
   if (!isLoading) {
@@ -15,3 +15,5 @@ export const Loading = () => {
     </div>
   );
 };
+
+export default Loading;

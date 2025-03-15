@@ -1,8 +1,8 @@
 import { api } from "@/shared/apis/api";
 
-export const fetchStep5 = async (comment: string) => {
+export const fetchStep5 = async (memorable_moment: string) => {
   try {
-    const response = await api.put("/retrospect/step5", { comment });
+    const response = await api.put("/retrospect/step5", { memorable_moment });
     return response.data;
   } catch (error) {
     console.error("fetchStep5: ", error);

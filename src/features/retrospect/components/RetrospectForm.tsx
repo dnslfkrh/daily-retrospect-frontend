@@ -8,30 +8,27 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { fetchTodayRetrospect } from "../services/fetchTodayRetrospect";
 import Step1Mood from "./Steps/Step1Mood";
-import Step2Highlight from "./Steps/Step2Highlight";
-import Step3Keywords from "./Steps/Step3Keywords";
-import Step4Lesson from "./Steps/Step4Lesson";
-import Step5Comment from "./Steps/Step5Comment";
+import Step2Keywords from "./Steps/Step2Keywords";
+import Step3Mistake from "./Steps/Step3Mistake";
+import Step4Achievement from "./Steps/Step4Achievement";
+import Step5MemorableMoment from "./Steps/Step5MemorableMoment";
+import Step6MemorableInteraction from "./Steps/Step6MemorableInteraction";
 
-export const RetrospectForm = () => {
+const RetrospectForm = () => {
   const [step, setStep] = useState<number | null>(null);
   const router = useRouter();
 
   const {
     setMood,
-    setHighlight,
     setKeywords,
-    setLesson,
-    setComment,
-    setGoalProgress,
-    setGoalFeedback,
+    setMistake,
+    setAchievement,
+    setMemorableMoment,
+    setMemorableInteraction,
     resetRetrospect,
   } = useRetrospectStore();
 
-  const {
-    startLoading,
-    endLoading,
-  } = useLoadingStore();
+  const { startLoading, endLoading } = useLoadingStore();
 
   useEffect(() => {
     const checkRetrospect = async () => {
@@ -40,31 +37,29 @@ export const RetrospectForm = () => {
         const data = await fetchTodayRetrospect();
         console.log("loadRetrospect: ", data);
 
-        const retrospect = data;
+        if (data) {
+          setMood(data.mood);
+          setKeywords(data.keywords);
+          setMistake(data.mistake);
+          setAchievement(data.achievement);
+          setMemorableMoment(data.memorable_moment);
+          setMemorableInteraction(data.memorable_interaction);
 
-        if (retrospect) {
-          setMood(retrospect.mood);
-          setHighlight(retrospect.highlight);
-          setKeywords(retrospect.keywords);
-          setLesson(retrospect.resolution);
-          setComment(retrospect.comment);
-          setGoalProgress(retrospect.goal_progress);
-          setGoalFeedback(retrospect.goal_feedback);
-
-          if (!retrospect.mood) {
+          if (!data.mood) {
             setStep(1);
-          } else if (!retrospect.highlight) {
+          } else if (!data.keywords?.length) {
             setStep(2);
-          } else if (!retrospect?.keywords?.length) {
+          } else if (!data.mistake) {
             setStep(3);
-          } else if (!retrospect.resolution) {
+          } else if (!data.achievement) {
             setStep(4);
-          } else if (!retrospect.comment) {
+          } else if (!data.memorable_moment) {
             setStep(5);
-          } else if (retrospect.goal_progress === null) {
+          } else if (!data.memorable_interaction) {
             setStep(6);
           } else {
             setStep(7);
+            router.push("/home");
           }
         } else {
           resetRetrospect();
@@ -81,20 +76,27 @@ export const RetrospectForm = () => {
   }, []);
 
   const handleNext = () => {
-    setStep((prev) => (prev !== null ? prev + 1 : 1));
+    setStep((prev) => {
+      const nextStep = prev !== null ? prev + 1 : 1;
+      if (nextStep === 7) {
+        router.push("/home");
+      }
+      return nextStep;
+    });
   };
 
   return (
     <FullHeightContainer>
       <AnimatePresence mode="wait">
         {step === 1 && <Step1Mood onNext={handleNext} />}
-        {step === 2 && <Step2Highlight onNext={handleNext} />}
-        {step === 3 && <Step3Keywords onNext={handleNext} />}
-        {step === 4 && <Step4Lesson onNext={handleNext} />}
-        {step === 5 && <Step5Comment onNext={handleNext} />}
-        {/* {step === 6 && <Step6GoalProgress onNext={handleNext} />}
-        {step === 7 && <Step7GoalFeedback />} */}
+        {step === 2 && <Step2Keywords onNext={handleNext} />}
+        {step === 3 && <Step3Mistake onNext={handleNext} />}
+        {step === 4 && <Step4Achievement onNext={handleNext} />}
+        {step === 5 && <Step5MemorableMoment onNext={handleNext} />}
+        {step === 6 && <Step6MemorableInteraction onNext={handleNext} />}
       </AnimatePresence>
     </FullHeightContainer>
   );
 };
+
+export default RetrospectForm;

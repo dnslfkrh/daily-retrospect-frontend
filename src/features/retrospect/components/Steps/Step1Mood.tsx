@@ -27,7 +27,7 @@ const Step1Mood = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <StepContainer>
-      <h2 className="text-lg font-semibold mb-4 text-center">오늘의 기분을 선택하세요.</h2>
+      <h2 className="text-lg font-semibold mb-4 text-black text-center">오늘 나의 기분은?</h2>
 
       <div className="grid grid-cols-5 gap-3">
         {MOODS.map(({ emoji, mood }) => (

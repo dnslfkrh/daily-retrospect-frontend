@@ -1,6 +1,6 @@
 "use client";
 
-import { RetrospectForm } from "../components/RetrospectForm";
+import RetrospectForm from "../components/RetrospectForm";
 
 export const RetrospectView = () => {
   return (

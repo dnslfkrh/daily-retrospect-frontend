@@ -1,58 +1,58 @@
 import { create } from "zustand";
 
-type GoalPregress = 'good' | 'normal' | 'bad' | null;
+type GoalRating = 1 | 2 | 3 | 4 | 5 | null;
 
 interface RetrospectState {
   date: string;
   mood: string;
-  highlight: string;
   keywords: string[];
-  lesson: string;
-  comment: string;
+  mistake: string;
+  achievement: string;
+  memorable_moment: string;
+  memorable_interaction: string;
   goalId: number | null;
-  goalProgress: GoalPregress;
-  goalFeedback: string;
+  goalRating: GoalRating; // 1~5점 평가
 
   setMood: (mood: string) => void;
-  setHighlight: (highlight: string) => void;
-  setKeywords: (keyword: string[]) => void;
-  setLesson: (resolution: string) => void;
-  setComment: (comment: string) => void;
-  setGoalId: (goal_id: number) => void;
-  setGoalProgress: (goal_progress: GoalPregress) => void;
-  setGoalFeedback: (goal_feedback: string) => void;
+  setKeywords: (keywords: string[]) => void;
+  setMistake: (mistake: string) => void;
+  setAchievement: (achievement: string) => void;
+  setMemorableMoment: (moment: string) => void;
+  setMemorableInteraction: (interaction: string) => void;
+  setGoalId: (goalId: number | null) => void;
+  setGoalRating: (goalRating: GoalRating) => void;
   resetRetrospect: () => void;
 }
 
 export const useRetrospectStore = create<RetrospectState>((set) => ({
   date: new Date().toISOString().split('T')[0], // YYYY-MM-DD 형식
   mood: "",
-  highlight: "",
   keywords: [],
-  lesson: "",
-  comment: "",
+  mistake: "",
+  achievement: "",
+  memorable_moment: "",
+  memorable_interaction: "",
   goalId: null,
-  goalProgress: null,
-  goalFeedback: "",
+  goalRating: null,
 
   setMood: (mood) => set({ mood }),
-  setHighlight: (highlight) => set({ highlight }),
   setKeywords: (keywords) => set({ keywords }),
-  setLesson: (lesson) => set({ lesson }),
-  setComment: (comment) => set({ comment }),
+  setMistake: (mistake) => set({ mistake }),
+  setAchievement: (achievement) => set({ achievement }),
+  setMemorableMoment: (moment) => set({ memorable_moment: moment }),
+  setMemorableInteraction: (interaction) => set({ memorable_interaction: interaction }),
   setGoalId: (goalId) => set({ goalId }),
-  setGoalProgress: (goalProgress) => set({ goalProgress }),
-  setGoalFeedback: (goalFeedback) => set({ goalFeedback }),
+  setGoalRating: (goalRating) => set({ goalRating }),
 
   resetRetrospect: () => set({
     date: new Date().toISOString().split('T')[0],
     mood: "",
-    highlight: "",
     keywords: [],
-    lesson: "",
-    comment: "",
+    mistake: "",
+    achievement: "",
+    memorable_moment: "",
+    memorable_interaction: "",
     goalId: null,
-    goalProgress: null,
-    goalFeedback: "",
+    goalRating: null,
   }),
 }));

@@ -1,38 +1,23 @@
 "use client";
 
 import { useRetrospectStore } from "@/shared/store/useRetrospect.store";
-import { useState } from "react";
 import { fetchStep5 } from "../../services/fetchStep5";
-import { StepContainer } from "./shared/StepContainer";
-import { TextAreaInput } from "./shared/TextAreaInput";
-import { NextButton } from "./shared/NextButton";
+import BaseTextInputStep from "./shared/BaseTextInputStep";
 
-const Step5MemorableMoment = ({ onNext }: { onNext: () => void }) => {
+const Step5MemorableMoment = ({ onNext }: { onNext: any }) => {
+  const memorableMoment = useRetrospectStore((state) => state.memorable_moment);
   const setMemorableMoment = useRetrospectStore((state) => state.setMemorableMoment);
-  const [inputValue, setInputValue] = useState("");
-
-  const handleComplete = async () => {
-    if (!inputValue.trim()) {
-      return
-    }
-    setMemorableMoment(inputValue);
-    await fetchStep5(inputValue);
-    console.log("Step 5 완료: 오늘 가장 기억에 남는 순간 -", inputValue);
-    onNext();
-  };
 
   return (
-    <StepContainer>
-      <h2 className="text-lg font-semibold mb-4 text-center text-black">
-        오늘 가장 기억에 남는 순간은?
-      </h2>
-      <TextAreaInput
-        value={inputValue}
-        onChange={setInputValue}
-        placeholder="오늘 기억에 남는 순간을 적어보세요."
-      />
-      <NextButton onClick={handleComplete} disabled={!inputValue.trim()} text={"다음"} />
-    </StepContainer>
+    <BaseTextInputStep
+      title="오늘 가장 기억에 남는 순간은?"
+      description="오늘 가장 기억에 남는 순간을 적어주세요."
+      value={memorableMoment}
+      onChange={setMemorableMoment}
+      fetchFunction={fetchStep5}
+      storeSetter={setMemorableMoment}
+      onComplete={onNext}
+    />
   );
 };
 

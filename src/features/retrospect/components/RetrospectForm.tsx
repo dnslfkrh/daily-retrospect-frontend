@@ -59,7 +59,6 @@ const RetrospectForm = () => {
             setStep(6);
           } else {
             setStep(7);
-            router.push("/home");
           }
         } else {
           resetRetrospect();
@@ -73,7 +72,15 @@ const RetrospectForm = () => {
     };
 
     checkRetrospect();
-  }, []);
+  }, [router]);
+
+  useEffect(() => {
+    if (step === 7) {
+      setTimeout(() => {
+        router.push("/home");
+      }, 0);
+    }
+  }, [step, router]);
 
   const handleNext = () => {
     setStep((prev) => {

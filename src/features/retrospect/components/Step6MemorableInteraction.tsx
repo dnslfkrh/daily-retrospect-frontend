@@ -1,7 +1,7 @@
 "use client";
 
 import { useRetrospectStore } from "@/shared/store/useRetrospect.store";
-import { fetchStep6 } from "../../services/fetchStep6";
+import { fetchStep6 } from "../services/fetchStep6";
 import BaseTextInputStep from "./shared/BaseTextInputStep";
 
 const Step6MemorableInteraction = ({ onNext }: { onNext: any }) => {

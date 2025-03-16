@@ -1,4 +1,4 @@
-import { api } from "@/shared/apis/api";
+import { api } from "@/shared/apis/base/api"
 
 export const fetchStep3 = async (mistake: string) => {
   try {

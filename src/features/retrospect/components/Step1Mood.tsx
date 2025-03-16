@@ -2,7 +2,7 @@
 
 import { useRetrospectStore } from "@/shared/store/useRetrospect.store";
 import { useState } from "react";
-import { fetchStep1 } from "../../services/fetchStep1";
+import { fetchStep1 } from "../services/fetchStep1";
 import { StepContainer } from "./shared/StepContainer";
 
 const MOODS = [

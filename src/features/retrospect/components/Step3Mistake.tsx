@@ -1,7 +1,7 @@
 "use client";
 
 import { useRetrospectStore } from "@/shared/store/useRetrospect.store";
-import { fetchStep3 } from "../../services/fetchStep3";
+import { fetchStep3 } from "../services/fetchStep3";
 import BaseTextInputStep from "./shared/BaseTextInputStep";
 
 const Step3Mistake = ({ onNext }: { onNext: any }) => {

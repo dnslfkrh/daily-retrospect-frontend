@@ -1,7 +1,7 @@
 "use client";
 
 import { useRetrospectStore } from "@/shared/store/useRetrospect.store";
-import { fetchStep5 } from "../../services/fetchStep5";
+import { fetchStep5 } from "../services/fetchStep5";
 import BaseTextInputStep from "./shared/BaseTextInputStep";
 
 const Step5MemorableMoment = ({ onNext }: { onNext: any }) => {

@@ -1,4 +1,4 @@
-import { api } from "@/shared/apis/api";
+import { api } from "@/shared/apis/base/api"
 
 export const fetchStep2 = async (keywords: string[]) => {
   try {

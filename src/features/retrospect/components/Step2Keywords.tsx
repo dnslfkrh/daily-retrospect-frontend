@@ -2,7 +2,7 @@
 
 import { useRetrospectStore } from "@/shared/store/useRetrospect.store";
 import { useState } from "react";
-import { fetchStep2 } from "../../services/fetchStep2";
+import { fetchStep2 } from "../services/fetchStep2";
 import { StepContainer } from "./shared/StepContainer";
 import { NextButton } from "./shared/NextButton";
 

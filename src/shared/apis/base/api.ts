@@ -50,6 +50,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (refreshError) {
         console.warn("리프레시 토큰도 만료됨, 로그인 필요");
+        console.error(refreshError);
         localStorage.removeItem("access_token");
         if (window.location.pathname !== "/auth") {
           window.location.href = "/auth";

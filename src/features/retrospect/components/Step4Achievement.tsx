@@ -4,7 +4,7 @@ import { useRetrospectStore } from "@/shared/store/useRetrospect.store";
 import { fetchStep4 } from "../services/fetchStep4";
 import BaseTextInputStep from "./shared/BaseTextInputStep";
 
-const Step4Achievement = ({ onNext }: { onNext: any }) => {
+const Step4Achievement = ({ onNext }: { onNext: () => void }) => {
   const achievement = useRetrospectStore((state) => state.achievement);
   const setAchievement = useRetrospectStore((state) => state.setAchievement);
 

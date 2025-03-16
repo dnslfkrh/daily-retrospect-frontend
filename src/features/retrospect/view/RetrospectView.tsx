@@ -13,7 +13,6 @@ import Step3Mistake from "../components/Step3Mistake";
 import Step4Achievement from "../components/Step4Achievement";
 import Step5MemorableMoment from "../components/Step5MemorableMoment";
 import Step6MemorableInteraction from "../components/Step6MemorableInteraction";
-import { a } from "framer-motion/client";
 
 const RetrospectView = () => {
   const [step, setStep] = useState<number | null>(null);
@@ -73,7 +72,18 @@ const RetrospectView = () => {
     };
 
     checkRetrospect();
-  }, [router]);
+  }, [
+    router,
+    startLoading,
+    endLoading,
+    resetRetrospect,
+    setAchievement,
+    setKeywords,
+    setMemorableInteraction,
+    setMemorableMoment,
+    setMistake,
+    setMood
+  ]);
 
   useEffect(() => {
     if (step === 7) {

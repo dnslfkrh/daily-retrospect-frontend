@@ -4,7 +4,7 @@ import { useRetrospectStore } from "@/shared/store/useRetrospect.store";
 import { fetchStep6 } from "../services/fetchStep6";
 import BaseTextInputStep from "./shared/BaseTextInputStep";
 
-const Step6MemorableInteraction = ({ onNext }: { onNext: any }) => {
+const Step6MemorableInteraction = ({ onNext }: { onNext: () => void }) => {
   const memorableInteraction = useRetrospectStore((state) => state.memorable_interaction);
   const setMemorableInteraction = useRetrospectStore((state) => state.setMemorableInteraction);
 

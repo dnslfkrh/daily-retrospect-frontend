@@ -24,10 +24,10 @@ const CallbackView = () => {
     };
 
     handleCallback();
-  }, []);
+  }, [router]);
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen bg-gray-200 text-black dark:bg-gray-800 dark:text-white">
       로그인 중...
     </div>
   );

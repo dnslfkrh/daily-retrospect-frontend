@@ -10,7 +10,6 @@ const BaseTextInputStep = ({
   description,
   placeholder = "오늘 나는..",
   value,
-  onChange,
   onComplete,
   fetchFunction,
   storeSetter,
@@ -38,8 +37,8 @@ const BaseTextInputStep = ({
 
   return (
     <StepContainer>
-      <h2 className="text-lg font-semibold text-center text-black mb-1">{title}</h2>
-      <p className="text-sm text-gray-500 mb-4">{description}</p>
+      <h2 className="text-lg font-semibold text-center text-black dark:text-white mb-1">{title}</h2>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{description}</p>
       <TextAreaInput value={inputValue} onChange={setInputValue} placeholder={placeholder} />
       <NextButton onClick={handleComplete} disabled={!inputValue.trim()} text={isLast ? "완료" : "다음"} />
     </StepContainer>

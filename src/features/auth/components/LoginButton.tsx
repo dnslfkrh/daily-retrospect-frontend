@@ -24,7 +24,7 @@ export default function LoginButton() {
   };
 
   return (
-    <button onClick={handleLogin} className="p-4 bg-gray-200 text-black rounded-xl">
+    <button onClick={handleLogin} className="p-4 bg-gray-200 text-black rounded-xl dark:bg-gray-800 dark:text-white">
       Start With Cognito
     </button>
   );

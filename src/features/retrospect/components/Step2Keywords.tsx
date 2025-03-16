@@ -24,7 +24,7 @@ const Step2Keywords = ({ onNext }: { onNext: () => void }) => {
 
   const handleComplete = async () => {
     if (selectedKeywords.length === 0) {
-      return
+      return;
     }
     setKeywords(selectedKeywords);
     await fetchStep2(selectedKeywords);
@@ -34,7 +34,7 @@ const Step2Keywords = ({ onNext }: { onNext: () => void }) => {
 
   return (
     <StepContainer>
-      <h2 className="text-lg font-semibold mb-4 text-center text-black">
+      <h2 className="text-lg font-semibold mb-4 text-center text-black dark:text-white">
         오늘을 표현할 수 있는 키워드는?
       </h2>
       <div className="flex flex-wrap gap-2 mb-4 justify-center">
@@ -43,7 +43,9 @@ const Step2Keywords = ({ onNext }: { onNext: () => void }) => {
             key={keyword}
             onClick={() => toggleKeyword(keyword)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all 
-              ${selectedKeywords.includes(keyword) ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}
+              ${selectedKeywords.includes(keyword) 
+                ? "bg-blue-500 text-white dark:bg-blue-700 dark:text-white" 
+                : "bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-300"}`}
           >
             {keyword}
           </button>

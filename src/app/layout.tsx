@@ -16,8 +16,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="overflow-hidden">
-      <body className="antialiased flex justify-center items-center bg-white text-black min-h-screen overflow-hidden">
+    <html lang="en">
+      <body className="antialiased flex justify-center items-center bg-white text-black min-h-screen">
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

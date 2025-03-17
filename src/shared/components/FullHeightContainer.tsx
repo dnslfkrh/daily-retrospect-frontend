@@ -11,7 +11,7 @@ const FullHeightContainer: React.FC<FullHeightContainerProps> = ({ children }) =
   const pathname = usePathname();
 
   const hasBottomNav = pathname !== "/auth";
-  const heightStyle = hasBottomNav ? "h-[calc(100vh-72px)]" : "h-screen";
+  const heightStyle = pathname === "/auth" ? "h-screen" : "h-[calc(100vh-72px)]";
 
   return (
     <div className={`top-0 left-0 w-full ${heightStyle} flex items-center justify-center bg-white dark:bg-gray-900 overflow-hidden`}>

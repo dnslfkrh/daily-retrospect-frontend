@@ -28,8 +28,8 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     <div className="w-full max-w-[450px] flex flex-col h-full min-h-screen relative">
       <TopNav />
 
-      <div className={`flex flex-col flex-grow pb-19 mt-14`}>
-        {children}
+      <div className={`flex flex-col flex-grow pb-19 ${pathname === "/auth" ? "" : "mt-14"}`}>
+      {children}
         <Loading />
       </div>
 

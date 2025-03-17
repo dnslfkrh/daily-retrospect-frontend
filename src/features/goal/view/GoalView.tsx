@@ -5,7 +5,8 @@ import { Plus } from "lucide-react";
 import { Goal } from "@/shared/types/Goal.type";
 import GoalModal from "../components/GoalModal";
 import GoalList from "../components/GoalList";
-import testGoals from "../test/data";
+import { fethcActivatedGoals } from "../services/fetchActivatedGoals";
+import { fetchFinishedGoals } from "../services/fetchFinishedGoals";
 
 const GoalView = () => {
   const [goals, setGoals] = useState<Goal[]>([]);
@@ -13,20 +14,21 @@ const GoalView = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCompleted, setShowCompleted] = useState(false);
 
-  const fetchGoals = async () => {
-    // TODO: 서버에서 진행 중인 목표 가져오기
-    return testGoals;
+  const getActivatedGoals = async () => {
+    const activatedGoals = await fethcActivatedGoals();
+    console.log("Activated goals: ", activatedGoals);
+    return activatedGoals;
   };
 
-  const fetchFinishedGoals = async () => {
-    // TODO: 서버에서 지난 목표 가져오기
-    console.log("fetchFinishedGoals");
-    return [];
+  const getFinishedGoals = async () => {
+    const finishedGoals = await fetchFinishedGoals();
+    console.log("finishedGoals: ", finishedGoals);
+    return finishedGoals;
   };
 
   useEffect(() => {
     const loadGoals = async () => {
-      const data = await fetchGoals();
+      const data = await getActivatedGoals();
       setGoals(data);
     };
     loadGoals();
@@ -38,7 +40,7 @@ const GoalView = () => {
 
   const toggleCompleted = async () => {
     if (!showCompleted && finishedGoals.length === 0) {
-      const data = await fetchFinishedGoals();
+      const data = await getFinishedGoals();
       setFinishedGoals(data);
     }
     setShowCompleted((prev) => !prev);

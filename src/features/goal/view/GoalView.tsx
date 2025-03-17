@@ -7,6 +7,7 @@ import GoalModal from "../components/GoalModal";
 import GoalList from "../components/GoalList";
 import { fethcActivatedGoals } from "../services/fetchActivatedGoals";
 import { fetchFinishedGoals } from "../services/fetchFinishedGoals";
+import { fetchCreateGoal } from "../services/fetchCreateGoal";
 
 const GoalView = () => {
   const [goals, setGoals] = useState<Goal[]>([]);
@@ -34,7 +35,8 @@ const GoalView = () => {
     loadGoals();
   }, []);
 
-  const handleAdd = (newGoal: Goal) => {
+  const handleAdd = async (newGoal: Goal) => {
+    await fetchCreateGoal(newGoal);
     setGoals((prev) => [...prev, { ...newGoal, id: prev.length + 1 }]);
   };
 

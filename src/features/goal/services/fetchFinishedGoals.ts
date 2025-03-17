@@ -6,6 +6,6 @@ export const fetchFinishedGoals = async () => {
     return response.data;
   } catch (error) {
     console.error("fetchGoals: ", error);
-    throw error
+    throw error;
   }
-}
+};

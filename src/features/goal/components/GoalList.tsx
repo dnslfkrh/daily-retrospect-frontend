@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import GoalBlock from "./GoalBlock";
 import { Goal } from "@/shared/types/Goal.type";
+import { fetchUpdateGoal } from "../services/fetchUpdateGoal";
+import { fetchDeleteGoal } from "../services/fetchDeleteGoal";
 
 type GoalListProps = {
   goals: Goal[];
@@ -13,14 +15,14 @@ const GoalList = ({ goals: initialGoals }: GoalListProps) => {
     setGoals(initialGoals);
   }, [initialGoals]);
 
-  const handleUpdate = (updatedGoal: Goal) => {
-    // TODO: 서버에서 목표 업데이트하기
+  const handleUpdate = async (updatedGoal: Goal) => {
+    await fetchUpdateGoal(updatedGoal);
     console.log("Updated goal:", updatedGoal);
     setGoals((prevGoals) => prevGoals.map((goal) => (goal.id === updatedGoal.id ? updatedGoal : goal)));
   };
 
-  const handleDelete = (id: number) => {
-    // TODO: 서버에서 목표 삭제하기
+  const handleDelete = async (id: number) => {
+    await fetchDeleteGoal(id);
     console.log("Deleted goal with ID:", id);
     setGoals((prevGoals) => prevGoals.filter((goal) => goal.id !== id));
   };

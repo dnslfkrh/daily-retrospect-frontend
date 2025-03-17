@@ -4,7 +4,7 @@ export type Goal = {
   description: string | null;
   start_date: string;
   end_date: string;
-  completed: boolean;
+  created_at: string;
 };
 
 export type GoalListProps = {

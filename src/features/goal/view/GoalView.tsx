@@ -1,99 +1,79 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
-import GoalBlock from "../components/GoalBlock";
+import { Goal } from "@/shared/types/Goal.type";
 import GoalModal from "../components/GoalModal";
+import GoalList from "../components/GoalList";
 import testGoals from "../test/data";
 
-type Goal = {
-  id: number;
-  title: string;
-  description: string | null;
-  start_date: string;
-  end_date: string;
-  completed: boolean;
-};
-
-const fetchActiveGoals = async (): Promise<Goal[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(testGoals.filter((goal) => new Date(goal.end_date) >= new Date()));
-    }, 500);
-  });
-};
-
-const fetchFinishedGoals = async (): Promise<Goal[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(testGoals.filter((goal) => new Date(goal.end_date) < new Date()));
-    }, 500);
-  });
-};
-
 const GoalView = () => {
-  const [activeGoals, setActiveGoals] = useState<Goal[] | null>(null);
-  const [completedGoals, setCompletedGoals] = useState<Goal[] | null>(null);
-  const [showCompleted, setShowCompleted] = useState(false);
+  const [goals, setGoals] = useState<Goal[]>([]);
+  const [finishedGoals, setFinishedGoals] = useState<Goal[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(false);
+
+  const fetchGoals = async () => {
+    // TODO: 서버에서 진행 중인 목표 가져오기
+    return testGoals;
+  };
+
+  const fetchFinishedGoals = async () => {
+    // TODO: 서버에서 지난 목표 가져오기
+    console.log("fetchFinishedGoals");
+    return [];
+  };
 
   useEffect(() => {
     const loadGoals = async () => {
-      const data = await fetchActiveGoals();
-      setActiveGoals(data);
+      const data = await fetchGoals();
+      setGoals(data);
     };
-
     loadGoals();
   }, []);
 
-  const loadCompletedGoals = async () => {
-    if (completedGoals === null) {
+  const handleAdd = (newGoal: Goal) => {
+    setGoals((prev) => [...prev, { ...newGoal, id: prev.length + 1 }]);
+  };
+
+  const toggleCompleted = async () => {
+    if (!showCompleted && finishedGoals.length === 0) {
       const data = await fetchFinishedGoals();
-      setCompletedGoals(data);
+      setFinishedGoals(data);
     }
-    setShowCompleted((prev) => (completedGoals?.length === 0 ? true : !prev));
+    setShowCompleted((prev) => !prev);
   };
 
   return (
-    <div className="px-4 w-full min-h-screen bg-white dark:bg-gray-900 flex flex-col relative pb-6 pt-4">
+    <div className="px-4 w-full min-h-screen bg-white dark:bg-gray-900 flex flex-col pb-6 pt-4">
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-lg font-semibold text-gray-800 dark:text-white">진행 중인 목표</h1>
+        <h1 className="text-lg font-semibold text-gray-800 dark:text-white">목표 관리</h1>
         <button onClick={() => setShowModal(true)} className="p-2 text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white">
           <Plus size={24} />
         </button>
       </div>
 
-      <div className="flex-grow space-y-4">
-        {activeGoals === null ? (
-          <p className="text-gray-500 dark:text-gray-400 text-sm">목표를 가져오는 중...</p>
-        ) : activeGoals.length === 0 ? (
-          <p className="text-gray-500 dark:text-gray-400 text-sm">목표가 없습니다.</p>
-        ) : (
-          activeGoals.map((goal) => <GoalBlock key={goal.id} goal={goal} />)
-        )}
-      </div>
+      {/* 진행 중인 목표 리스트 */}
+      <h2 className="text-md font-medium text-gray-700 dark:text-gray-300 mb-2">진행 중인 목표</h2>
+      <GoalList goals={goals} />
 
+      {/* 지난 목표 보기 토글 버튼 */}
       <button
-        onClick={loadCompletedGoals}
-        className="mt-6 w-full text-center text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 underline"
+        onClick={toggleCompleted}
+        className="mt-4 text-gray-500 hover:underline dark:text-blue-400"
       >
-        {showCompleted ? "숨기기" : "지난 목표 보기"}
+        {showCompleted ? "지난 목표 숨기기" : "지난 목표 보기"}
       </button>
 
+      {/* 지난 목표 리스트 (토글 상태에 따라 표시) */}
       {showCompleted && (
-        <div className="mt-4 space-y-4">
-          <h1 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">지난 목표</h1>
-          {completedGoals === null ? (
-            <p className="text-gray-500 dark:text-gray-400 text-sm">목표를 가져오는 중...</p>
-          ) : completedGoals.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400 text-sm">지난 목표가 없습니다.</p>
-          ) : (
-            completedGoals.map((goal) => <GoalBlock key={goal.id} goal={goal} />)
-          )}
-        </div>
+        <>
+          <h2 className="text-md font-medium text-gray-700 dark:text-gray-300 mt-4">지난 목표</h2>
+          <GoalList goals={finishedGoals} />
+        </>
       )}
 
-      {showModal && <GoalModal onClose={() => setShowModal(false)} />}
+      {showModal && <GoalModal goal={null} onClose={() => setShowModal(false)} onSave={handleAdd} />}
     </div>
   );
 };

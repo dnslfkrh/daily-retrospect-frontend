@@ -64,9 +64,9 @@ const GoalView = () => {
       {/* 지난 목표 보기 토글 버튼 */}
       <button
         onClick={toggleCompleted}
-        className="mt-4 text-gray-500 hover:underline dark:text-blue-400"
+        className="mt-4 text-gray-500 hover:underline dark:text-gray-200"
       >
-        {showCompleted ? "지난 목표 숨기기" : "지난 목표 보기"}
+        {showCompleted ? "숨기기" : "지난 목표 보기"}
       </button>
 
       {/* 지난 목표 리스트 (토글 상태에 따라 표시) */}

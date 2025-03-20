@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import GoalBlock from "./GoalBlock";
-import { Goal } from "@/shared/types/Goal.type";
+import { Goal } from "@/features/goal/types/Props";
 import { fetchUpdateGoal } from "../services/fetchUpdateGoal";
 import { fetchDeleteGoal } from "../services/fetchDeleteGoal";
 

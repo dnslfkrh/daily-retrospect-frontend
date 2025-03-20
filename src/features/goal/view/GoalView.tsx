@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
-import { Goal } from "@/shared/types/Goal.type";
+import { Goal } from "@/features/goal/types/Props";
 import GoalModal from "../components/GoalModal";
 import GoalList from "../components/GoalList";
 import { fethcActivatedGoals } from "../services/fetchActivatedGoals";

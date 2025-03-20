@@ -10,7 +10,10 @@ const Loading = dynamic(() => import("@/shared/components/Loading"), { ssr: fals
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isHiddenOverflow = pathname === "/retrospect" || pathname === "/auth";
+  const isHiddenOverflow =
+    pathname === "/retrospect" ||
+    pathname === "/auth" ||
+    pathname === "/my/setting";
 
   useEffect(() => {
     if (isHiddenOverflow) {
@@ -29,7 +32,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
       <TopNav />
 
       <div className={`flex flex-col flex-grow pb-19 ${pathname === "/auth" ? "" : "mt-14"}`}>
-      {children}
+        {children}
         <Loading />
       </div>
 

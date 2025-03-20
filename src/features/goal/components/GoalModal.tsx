@@ -1,6 +1,6 @@
 "use client";
 
-import { Goal } from "@/shared/types/Goal.type";
+import { Goal } from "@/features/goal/types/Props";
 import { useState } from "react";
 
 const GoalModal = ({ goal, onClose, onSave }: { goal: Goal | null; onClose: () => void; onSave: (data: Goal) => void }) => {

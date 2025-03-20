@@ -3,7 +3,7 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 import GoalModal from "./GoalModal";
-import { Goal } from "@/shared/types/Goal.type";
+import { Goal } from "@/features/goal/types/Props";
 
 type GoalProps = {
   goal: Goal;

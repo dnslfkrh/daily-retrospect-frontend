@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Goal } from '../types/Goal.type';
+import { Goal } from '../../features/goal/types/Props';
 
 interface GoalState {
   goals: Goal[];

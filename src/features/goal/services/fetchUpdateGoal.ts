@@ -1,5 +1,5 @@
 import { api } from "@/shared/apis/base/api";
-import { Goal } from "@/shared/types/Goal.type";
+import { Goal } from "@/features/goal/types/Props";
 
 export const fetchUpdateGoal = async (updatedGoal: Goal) => {
   const { created_at, ...filteredGoal } = updatedGoal;

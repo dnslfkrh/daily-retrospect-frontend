@@ -1,4 +1,4 @@
-export type Goal = {
+export interface Goal {
   id: number;
   title: string;
   description: string | null;

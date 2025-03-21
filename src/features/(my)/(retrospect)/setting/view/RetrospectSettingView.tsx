@@ -67,7 +67,7 @@ export const RetrospectSettingView = () => {
         ) : (
           <div className="w-full max-w-md flex flex-col items-center">
             <h1 className="text-xl font-semibold text-center text-black dark:text-gray-200 w-full mb-2">
-              작성할 회고의 방향성
+              나의 회고 스타일
             </h1>
 
             {/* 컨셉 선택 */}

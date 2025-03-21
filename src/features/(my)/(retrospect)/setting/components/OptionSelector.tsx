@@ -24,15 +24,19 @@ export const OptionSelector = <T,>({
       <h2 className="text-lg font-medium mb-4 text-center text-gray-800 dark:text-gray-300">
         {title}
       </h2>
-      <div className="relative flex justify-between w-full">
+      <div className="relative flex justify-center space-x-4 w-full">
         {options.map((option) => (
           <motion.button
             key={option.value as string}
             onClick={() => setSelectedOption(option.value)}
-            animate={{ scale: selectedOption === option.value ? 1.1 : 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            className={`px-4 py-2 font-medium transition-colors duration-200 
-              ${selectedOption === option.value ? "text-black dark:text-gray-200" : "text-gray-600 dark:text-gray-400"}`}
+            animate={{ scale: selectedOption === option.value ? 1.05 : 1 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className={`relative px-6 py-3 font-medium transition-all duration-200 rounded-full border
+              ${
+                selectedOption === option.value
+                  ? "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-300 shadow-sm"
+                  : "text-gray-600 dark:text-gray-400 border-transparent"
+              }`}
           >
             {option.label}
           </motion.button>
@@ -44,7 +48,7 @@ export const OptionSelector = <T,>({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
           className="mt-4 text-sm text-center text-gray-700 dark:text-gray-400"
         >
           {options.find((o) => o.value === selectedOption)?.description}

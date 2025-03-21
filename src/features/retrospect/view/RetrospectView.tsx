@@ -1,121 +1,138 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
+import { fetchSession } from "../services/fetchSession";
+import { motion, AnimatePresence } from "framer-motion";
 import FullHeightContainer from "@/shared/components/FullHeightContainer";
-import { useLoadingStore } from "@/shared/store/useLoading.store";
-import { useRetrospectStore } from "@/shared/store/useRetrospect.store";
-import { AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { fetchTodayRetrospect } from "../../../shared/apis/fetchTodayRetrospect";
-import Step1Mood from "../components/Step1Mood";
-import Step2Keywords from "../components/Step2Keywords";
-import Step3Mistake from "../components/Step3Mistake";
-import Step4Achievement from "../components/Step4Achievement";
-import Step5MemorableMoment from "../components/Step5MemorableMoment";
-import Step6MemorableInteraction from "../components/Step6MemorableInteraction";
+import { AnswerType } from "../enums/retrospect.enum";
+import LoadingText from "@/shared/components/LoadingText";
+import TextAnswer from "../components/TextAnswer";
+import ScoreAnswer from "../components/ScoreAnswer";
+import SingleChoiceAnswer from "../components/SingleChoiceAnswer";
 
-const RetrospectView = () => {
-  const [step, setStep] = useState<number | null>(null);
-  const router = useRouter();
+interface RetrospectQuestion {
+  id: number;
+  concept: string;
+  answer_type: AnswerType;
+  question_text: string;
+}
 
-  const {
-    setMood,
-    setKeywords,
-    setMistake,
-    setAchievement,
-    setMemorableMoment,
-    setMemorableInteraction,
-    resetRetrospect,
-  } = useRetrospectStore();
+interface RetrospectSession {
+  id: number;
+  created_at: string;
+  answers: string[];
+  questions: RetrospectQuestion[];
+}
 
-  const { startLoading, endLoading } = useLoadingStore();
+export const RetrospectView = () => {
+  const [session, setSession] = useState<RetrospectSession | null>(null);
+  const [answers, setAnswers] = useState<{ [key: number]: string }>({});
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const checkRetrospect = async () => {
-      startLoading();
+    const loadSession = async () => {
       try {
-        const data = await fetchTodayRetrospect();
-        console.log("loadRetrospect: ", data);
-
-        if (data) {
-          setMood(data.mood);
-          setKeywords(data.keywords);
-          setMistake(data.mistake);
-          setAchievement(data.achievement);
-          setMemorableMoment(data.memorable_moment);
-          setMemorableInteraction(data.memorable_interaction);
-
-          if (!data.mood) {
-            setStep(1);
-          } else if (!data.keywords?.length) {
-            setStep(2);
-          } else if (!data.mistake) {
-            setStep(3);
-          } else if (!data.achievement) {
-            setStep(4);
-          } else if (!data.memorable_moment) {
-            setStep(5);
-          } else if (!data.memorable_interaction) {
-            setStep(6);
-          } else {
-            setStep(7);
-          }
-        } else {
-          resetRetrospect();
-          setStep(1);
-        }
-      } catch (error) {
-        console.error("회고 데이터를 불러오는 중 오류 발생:", error);
-      } finally {
-        endLoading();
+        const data = await fetchSession();
+        setSession(data);
+      } catch (err) {
+        setError("회고 데이터를 불러오는 중 오류가 발생했습니다.");
       }
     };
+    loadSession();
+  }, []);
 
-    checkRetrospect();
-  }, [
-    router,
-    startLoading,
-    endLoading,
-    resetRetrospect,
-    setAchievement,
-    setKeywords,
-    setMemorableInteraction,
-    setMemorableMoment,
-    setMistake,
-    setMood
-  ]);
+  const handleAnswerChange = (value: string) => {
+    if (!session) return;
 
-  useEffect(() => {
-    if (step === 7) {
-      setTimeout(() => {
-        alert("오늘의 회고가 완료되었습니다.");
-        router.push("/home");
-      }, 0);
+    const currentQuestion = session.questions[currentIndex];
+    setAnswers((prev) => ({ ...prev, [currentQuestion.id]: value }));
+  };
+
+  const handleSubmit = async () => {
+    if (!session || currentIndex >= session.questions.length) return;
+
+    try {
+      // TODO: API PUT 요청 추가
+      // await saveAnswers(session.id, answers);
+      console.log(session.id, answers);
+      alert("회고가 저장되었습니다.");
+    } catch (err) {
+      setError("회고 저장 중 오류가 발생했습니다.");
     }
-  }, [step, router]);
+  };
+
+  const handleSkip = () => {
+    if (!session || currentIndex >= session.questions.length) return;
+
+    handleAnswerChange("");
+
+    if (currentIndex < session.questions.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    } else {
+      handleSubmit();
+    }
+  };
 
   const handleNext = () => {
-    setStep((prev) => {
-      const nextStep = prev !== null ? prev + 1 : 1;
-      if (nextStep === 7) {
-        router.push("/home");
-      }
-      return nextStep;
-    });
+    if (!session) return;
+
+    if (currentIndex < session.questions.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    } else {
+      handleSubmit();
+    }
   };
+
+  if (!session) {
+    return <LoadingText />;
+  }
+
+  const currentQuestion = session.questions[currentIndex];
 
   return (
     <FullHeightContainer>
       <AnimatePresence mode="wait">
-        {step === 1 && <Step1Mood onNext={handleNext} />}
-        {step === 2 && <Step2Keywords onNext={handleNext} />}
-        {step === 3 && <Step3Mistake onNext={handleNext} />}
-        {step === 4 && <Step4Achievement onNext={handleNext} />}
-        {step === 5 && <Step5MemorableMoment onNext={handleNext} />}
-        {step === 6 && <Step6MemorableInteraction onNext={handleNext} />}
+        {currentQuestion && (
+          <motion.div
+            key={currentQuestion.id}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.3 }}
+            className="w-full max-w-lg mx-auto"
+          >
+            <label className="block text-xl font-semibold text-center text-gray-700 dark:text-gray-300">
+              {currentQuestion.question_text}
+            </label>
+
+            <div className="mt-6">
+              {currentQuestion.answer_type === "text" ? (
+                <TextAnswer value={answers[currentQuestion.id] || ""} onChange={handleAnswerChange} />
+              ) : currentQuestion.answer_type === "score" ? (
+                <ScoreAnswer value={answers[currentQuestion.id]} onChange={handleAnswerChange} />
+              ) : (
+                <SingleChoiceAnswer question={currentQuestion.question_text} value={answers[currentQuestion.id]} onSelect={handleAnswerChange} />
+              )}
+            </div>
+
+            <button
+              className="w-full max-w-lg mx-auto mt-4 p-2 rounded transition-all disabled:opacity-50 bg-black text-white hover:bg-gray-900 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+              onClick={handleNext}
+              disabled={!answers[currentQuestion.id]}
+            >
+              {currentIndex === session.questions.length - 1 ? "저장하기" : "다음"}
+            </button>
+
+            <button
+              className="w-full max-w-lg mx-auto mt-8 p-2 text-center text-gray-500 dark:text-gray-400 underline"
+              onClick={handleSkip}
+            >
+              건너뛰기
+            </button>
+          </motion.div>
+        )}
       </AnimatePresence>
     </FullHeightContainer>
   );
 };
-
-export default RetrospectView;

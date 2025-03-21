@@ -4,55 +4,53 @@ type GoalRating = 1 | 2 | 3 | 4 | 5 | null;
 
 interface RetrospectState {
   date: string;
-  mood: string;
-  keywords: string[];
-  mistake: string;
-  achievement: string;
-  memorable_moment: string;
-  memorable_interaction: string;
+  questions: { id: number; text: string; type: "common" | "concept" }[];
+  answers: Record<number, string | null>;
+  skippedQuestions: number[];
   goalId: number | null;
-  goalRating: GoalRating; // 1~5점 평가
+  goalRating: GoalRating;
 
-  setMood: (mood: string) => void;
-  setKeywords: (keywords: string[]) => void;
-  setMistake: (mistake: string) => void;
-  setAchievement: (achievement: string) => void;
-  setMemorableMoment: (moment: string) => void;
-  setMemorableInteraction: (interaction: string) => void;
+  setQuestions: (questions: { id: number; text: string; type: "common" | "concept" }[]) => void;
+  setAnswer: (questionId: number, answer: string | null) => void;
+  skipQuestion: (questionId: number) => void;
   setGoalId: (goalId: number | null) => void;
   setGoalRating: (goalRating: GoalRating) => void;
   resetRetrospect: () => void;
 }
 
 export const useRetrospectStore = create<RetrospectState>((set) => ({
-  date: new Date().toISOString().split('T')[0], // YYYY-MM-DD 형식
-  mood: "",
-  keywords: [],
-  mistake: "",
-  achievement: "",
-  memorable_moment: "",
-  memorable_interaction: "",
+  date: new Date().toISOString().split("T")[0],
+  questions: [],
+  answers: {},
+  skippedQuestions: [],
   goalId: null,
   goalRating: null,
 
-  setMood: (mood) => set({ mood }),
-  setKeywords: (keywords) => set({ keywords }),
-  setMistake: (mistake) => set({ mistake }),
-  setAchievement: (achievement) => set({ achievement }),
-  setMemorableMoment: (moment) => set({ memorable_moment: moment }),
-  setMemorableInteraction: (interaction) => set({ memorable_interaction: interaction }),
+  setQuestions: (questions) => set({ questions }),
+
+  setAnswer: (questionId, answer) =>
+    set((state) => ({
+      answers: { ...state.answers, [questionId]: answer },
+      skippedQuestions: state.skippedQuestions.filter((id) => id !== questionId),
+    })),
+
+  skipQuestion: (questionId) =>
+    set((state) => ({
+      skippedQuestions: [...new Set([...state.skippedQuestions, questionId])],
+      answers: { ...state.answers, [questionId]: null },
+    })),
+
   setGoalId: (goalId) => set({ goalId }),
+
   setGoalRating: (goalRating) => set({ goalRating }),
 
-  resetRetrospect: () => set({
-    date: new Date().toISOString().split('T')[0],
-    mood: "",
-    keywords: [],
-    mistake: "",
-    achievement: "",
-    memorable_moment: "",
-    memorable_interaction: "",
-    goalId: null,
-    goalRating: null,
-  }),
+  resetRetrospect: () =>
+    set({
+      date: new Date().toISOString().split("T")[0],
+      questions: [],
+      answers: {},
+      skippedQuestions: [],
+      goalId: null,
+      goalRating: null,
+    }),
 }));

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"; // Next SSR에서는 axios 대신 fetch 사용
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,

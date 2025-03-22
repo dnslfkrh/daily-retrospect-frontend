@@ -9,6 +9,7 @@ import LoadingText from "@/shared/components/LoadingText";
 import TextAnswer from "../components/TextAnswer";
 import ScoreAnswer from "../components/ScoreAnswer";
 import SingleChoiceAnswer from "../components/SingleChoiceAnswer";
+import { fetchSaveAnswer } from "../services/fetchSaveAnswer";
 
 interface RetrospectQuestion {
   id: number;
@@ -17,10 +18,18 @@ interface RetrospectQuestion {
   question_text: string;
 }
 
+interface RetrospectAnswer {
+  id: number;
+  answer_type: AnswerType;
+  answer: string;
+  created_at: string;
+  updated_at: string;
+}
+
 interface RetrospectSession {
   id: number;
   created_at: string;
-  answers: string[];
+  answers: RetrospectAnswer[];
   questions: RetrospectQuestion[];
 }
 
@@ -28,65 +37,45 @@ export const RetrospectView = () => {
   const [session, setSession] = useState<RetrospectSession | null>(null);
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadSession = async () => {
-      try {
-        const data = await fetchSession();
-        setSession(data);
-      } catch (err) {
-        setError("회고 데이터를 불러오는 중 오류가 발생했습니다.");
-      }
+      const data: RetrospectSession = await fetchSession();
+      setSession(data);
+
+      const initialAnswers = data.questions.reduce(
+        (acc, q, index) => ({
+          ...acc,
+          [q.id]: data.answers[index]?.answer || "",
+        }),
+        {} as { [key: number]: string }
+      );
+
+      setAnswers(initialAnswers);
     };
+
     loadSession();
   }, []);
 
   const handleAnswerChange = (value: string) => {
     if (!session) return;
-
-    const currentQuestion = session.questions[currentIndex];
-    setAnswers((prev) => ({ ...prev, [currentQuestion.id]: value }));
+    setAnswers((prev) => ({ ...prev, [session.questions[currentIndex].id]: value }));
   };
 
-  const handleSubmit = async () => {
-    if (!session || currentIndex >= session.questions.length) return;
-
-    try {
-      // TODO: API PUT 요청 추가
-      // await saveAnswers(session.id, answers);
-      console.log(session.id, answers);
-      alert("회고가 저장되었습니다.");
-    } catch (err) {
-      setError("회고 저장 중 오류가 발생했습니다.");
-    }
-  };
-
-  const handleSkip = () => {
-    if (!session || currentIndex >= session.questions.length) return;
-
-    handleAnswerChange("");
-
-    if (currentIndex < session.questions.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else {
-      handleSubmit();
-    }
-  };
-
-  const handleNext = () => {
+  const handleNavigation = async (skip = false) => {
     if (!session) return;
 
+    const currentQuestion = session.questions[currentIndex];
+    await fetchSaveAnswer({ sessionId: session.id, questionId: currentQuestion.id, answer: skip ? "" : answers[currentQuestion.id] });
+
     if (currentIndex < session.questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
-      handleSubmit();
+      alert("회고가 저장되었습니다.");
     }
   };
 
-  if (!session) {
-    return <LoadingText />;
-  }
+  if (!session) return <LoadingText />;
 
   const currentQuestion = session.questions[currentIndex];
 
@@ -107,27 +96,27 @@ export const RetrospectView = () => {
             </label>
 
             <div className="mt-6">
-              {currentQuestion.answer_type === "text" ? (
-                <TextAnswer value={answers[currentQuestion.id] || ""} onChange={handleAnswerChange} />
-              ) : currentQuestion.answer_type === "score" ? (
-                <ScoreAnswer value={answers[currentQuestion.id]} onChange={handleAnswerChange} />
-              ) : (
-                <SingleChoiceAnswer question={currentQuestion.question_text} value={answers[currentQuestion.id]} onSelect={handleAnswerChange} />
-              )}
+              {
+                {
+                  [AnswerType.TEXT]: <TextAnswer value={answers[currentQuestion.id] || ""} onChange={handleAnswerChange} />,
+                  [AnswerType.SCORE]: <ScoreAnswer value={answers[currentQuestion.id] || ""} onChange={handleAnswerChange} />,
+                  [AnswerType.SINGLE_CHOICE]: (
+                    <SingleChoiceAnswer question={currentQuestion.question_text} value={answers[currentQuestion.id] || ""} onSelect={handleAnswerChange} />
+                  ),
+                  [AnswerType.MULTI_CHOICE]: <></>,
+                }[currentQuestion.answer_type]
+              }
             </div>
 
             <button
               className="w-full max-w-lg mx-auto mt-4 p-2 rounded transition-all disabled:opacity-50 bg-black text-white hover:bg-gray-900 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
-              onClick={handleNext}
+              onClick={() => handleNavigation()}
               disabled={!answers[currentQuestion.id]}
             >
-              {currentIndex === session.questions.length - 1 ? "저장하기" : "다음"}
+              {currentIndex === session.questions.length - 1 ? "저장" : "다음"}
             </button>
 
-            <button
-              className="w-full max-w-lg mx-auto mt-8 p-2 text-center text-gray-500 dark:text-gray-400 underline"
-              onClick={handleSkip}
-            >
+            <button className="w-full max-w-lg mx-auto mt-8 p-2 text-center text-gray-500 dark:text-gray-400 underline" onClick={() => handleNavigation(true)}>
               건너뛰기
             </button>
           </motion.div>

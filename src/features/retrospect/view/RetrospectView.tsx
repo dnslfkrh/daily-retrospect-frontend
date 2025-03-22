@@ -26,11 +26,17 @@ interface RetrospectAnswer {
   updated_at: string;
 }
 
+interface Goal {
+  id: number;
+  title: string;
+}
+
 interface RetrospectSession {
   id: number;
   created_at: string;
   answers: RetrospectAnswer[];
   questions: RetrospectQuestion[];
+  goals: Goal[];
 }
 
 export const RetrospectView = () => {
@@ -44,7 +50,7 @@ export const RetrospectView = () => {
       setSession(data);
 
       const initialAnswers = data.questions.reduce((acc, q) => {
-        const existingAnswer = data.answers.find((a) => a.id === q.id);
+        const existingAnswer = (data.answers ?? []).find((a) => a.id === q.id);
         return {
           ...acc,
           [q.id]: existingAnswer?.answer || "",
@@ -78,6 +84,7 @@ export const RetrospectView = () => {
   if (!session) return <LoadingText />;
 
   const currentQuestion = session.questions[currentIndex];
+  const isGoalQuestion = currentQuestion.concept === "goal";
 
   return (
     <FullHeightContainer>
@@ -95,14 +102,25 @@ export const RetrospectView = () => {
               {currentQuestion.question_text}
             </label>
 
+            {isGoalQuestion && session.goals.length > 0 && (
+              <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">진행 중인 목표들</h3>
+                <ul className="mt-2 space-y-2 max-h-40 overflow-y-auto">
+                  {session.goals.map((goal) => (
+                    <li key={goal.id} className="p-2 bg-white dark:bg-gray-700 rounded shadow">
+                      {goal.title}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="mt-6">
               {
                 {
                   [AnswerType.TEXT]: <TextAnswer value={answers[currentQuestion.id] || ""} onChange={handleAnswerChange} />,
                   [AnswerType.SCORE]: <ScoreAnswer value={answers[currentQuestion.id] || ""} onChange={handleAnswerChange} />,
-                  [AnswerType.SINGLE_CHOICE]: (
-                    <SingleChoiceAnswer question={currentQuestion.question_text} value={answers[currentQuestion.id] || ""} onSelect={handleAnswerChange} />
-                  ),
+                  [AnswerType.SINGLE_CHOICE]: <SingleChoiceAnswer question={currentQuestion.question_text} value={answers[currentQuestion.id] || ""} onSelect={handleAnswerChange} />,
                   [AnswerType.MULTI_CHOICE]: <></>,
                 }[currentQuestion.answer_type]
               }

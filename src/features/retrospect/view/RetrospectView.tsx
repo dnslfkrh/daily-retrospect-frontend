@@ -43,13 +43,13 @@ export const RetrospectView = () => {
       const data: RetrospectSession = await fetchSession();
       setSession(data);
 
-      const initialAnswers = data.questions.reduce(
-        (acc, q, index) => ({
+      const initialAnswers = data.questions.reduce((acc, q) => {
+        const existingAnswer = data.answers.find((a) => a.id === q.id);
+        return {
           ...acc,
-          [q.id]: data.answers[index]?.answer || "",
-        }),
-        {} as { [key: number]: string }
-      );
+          [q.id]: existingAnswer?.answer || "",
+        };
+      }, {} as { [key: number]: string });
 
       setAnswers(initialAnswers);
     };

@@ -50,13 +50,11 @@ export const RetrospectView = () => {
       console.log(data);
       setSession(data);
 
-      // 중요한 변경 부분: 질문과 답변을 인덱스로 매칭
       const initialAnswers = data.questions.reduce((acc, question, index) => {
-        // 질문과 같은 인덱스의 답변을 찾음
         const matchingAnswer = data.answers[index];
         return {
           ...acc,
-          [question.id]: matchingAnswer?.answer || "", // 매칭된 답변 또는 빈 문자열
+          [question.id]: matchingAnswer?.answer || "",
         };
       }, {} as { [key: number]: string });
 

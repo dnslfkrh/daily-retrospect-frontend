@@ -47,13 +47,16 @@ export const RetrospectView = () => {
   useEffect(() => {
     const loadSession = async () => {
       const data: RetrospectSession = await fetchSession();
+      console.log(data);
       setSession(data);
 
-      const initialAnswers = data.questions.reduce((acc, q) => {
-        const existingAnswer = (data.answers ?? []).find((a) => a.id === q.id);
+      // 중요한 변경 부분: 질문과 답변을 인덱스로 매칭
+      const initialAnswers = data.questions.reduce((acc, question, index) => {
+        // 질문과 같은 인덱스의 답변을 찾음
+        const matchingAnswer = data.answers[index];
         return {
           ...acc,
-          [q.id]: existingAnswer?.answer || "",
+          [question.id]: matchingAnswer?.answer || "", // 매칭된 답변 또는 빈 문자열
         };
       }, {} as { [key: number]: string });
 
@@ -65,14 +68,19 @@ export const RetrospectView = () => {
 
   const handleAnswerChange = (value: string) => {
     if (!session) return;
-    setAnswers((prev) => ({ ...prev, [session.questions[currentIndex].id]: value }));
+    const currentQuestion = session.questions[currentIndex];
+    setAnswers((prev) => ({ ...prev, [currentQuestion.id]: value }));
   };
 
   const handleNavigation = async (skip = false) => {
     if (!session) return;
 
     const currentQuestion = session.questions[currentIndex];
-    await fetchSaveAnswer({ sessionId: session.id, questionId: currentQuestion.id, answer: skip ? "" : answers[currentQuestion.id] });
+    await fetchSaveAnswer({
+      sessionId: session.id,
+      questionId: currentQuestion.id,
+      answer: skip ? "" : answers[currentQuestion.id],
+    });
 
     if (currentIndex < session.questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);

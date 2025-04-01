@@ -1,35 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { format, subMonths, addMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isSameMonth, getDay } from "date-fns";
-import { CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
-
-const months = [
-  "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"
-];
-
-const fetchRetrospectDates = async (): Promise<Date[]> => {
-  // TODO: Replace with actual API call
-  return [
-    "2025-03-28 00:44:43.654000",
-    "2025-03-29 05:35:35.731684",
-    "2025-03-28 06:44:02.976000",
-    "2025-04-01 14:59:17.109845",
-  ].map(date => new Date(date));
-};
-
-const fetchSummary = async (date: Date): Promise<string> => {
-  // TODO: Replace with actual API call
-  return `Summary for ${format(date, "yyyy-MM-dd")}`;
-};
+import { subMonths, addMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, getDay, isSameMonth } from "date-fns";
+import MonthNavigation from "../components/MonthNavigation";
+import DayOfWeek from "../components/DayOfWeek";
+import DayButton from "../components/DayButton";
+import SelectedDateSummary from "../components/SelectedDateSummary";
+import { fetchRetrospectDates } from "../services/fetchRetrospectDates";
+import { fetchSummary } from "../services/fetchSummary";
 
 const CalendarView = () => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
   const [retrospectDates, setRetrospectDates] = useState<Date[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [summary, setSummary] = useState<string>("");
-  const monthName = months[currentMonth.getMonth()];
 
   useEffect(() => {
     const loadRetrospectDates = async () => {
@@ -48,54 +32,48 @@ const CalendarView = () => {
   const emptyDays = Array(firstDayIndex).fill(null);
 
   const handlePrevMonth = () => {
+    setSelectedDate(null);
     setCurrentMonth(subMonths(currentMonth, 1));
   };
 
   const handleNextMonth = () => {
     if (isSameMonth(currentMonth, new Date())) return;
+    setSelectedDate(null);
     setCurrentMonth(addMonths(currentMonth, 1));
   };
 
   const handleDateClick = async (date: Date) => {
-    if (!retrospectDates.some(d => isSameDay(d, date))) return;
+    if (!retrospectDates.some(d => isSameDay(d, date))) {
+      return;
+    }
     setSelectedDate(date);
     const summaryData = await fetchSummary(date);
     setSummary(summaryData);
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto mt-8">
-      <div className="flex justify-between items-center mb-4">
-        <button onClick={handlePrevMonth} className="p-2 rounded-full hover:bg-gray-200">
-          <ChevronLeft />
-        </button>
-        <h2 className="text-xl font-semibold">{`${format(currentMonth, "yyyy")}년 ${monthName}`}</h2>
-        <button onClick={handleNextMonth} disabled={isSameMonth(currentMonth, new Date())} className="p-2 rounded-full hover:bg-gray-200 disabled:opacity-50">
-          <ChevronRight />
-        </button>
+    <div className="flex flex-col items-center p-4 mt-4">
+      <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border border-gray-200 dark:border-gray-700" style={{ maxWidth: "336px" }}>
+        <MonthNavigation currentMonth={currentMonth} onPrevMonth={handlePrevMonth} onNextMonth={handleNextMonth} />
+        <DayOfWeek />
+        <div className="grid grid-cols-7 gap-1 mt-2">
+          {emptyDays.map((_, index) => (
+            <div key={`empty-${index}`} className="w-10 h-10"></div>
+          ))}
+          {daysInMonth.map(day => (
+            <DayButton
+              key={day.toISOString()}
+              day={day}
+              isRetrospectDate={retrospectDates.some(d => isSameDay(d, day))}
+              onClick={handleDateClick}
+            />
+          ))}
+        </div>
       </div>
-      <div className="grid grid-cols-7 gap-1">
-        {["일", "월", "화", "수", "목", "금", "토"].map(day => (
-          <div key={day} className="text-center font-semibold">{day}</div>
-        ))}
-        {emptyDays.map((_, index) => (
-          <div key={`empty-${index}`} className="w-10 h-10"></div>
-        ))}
-        {daysInMonth.map(day => (
-          <motion.button
-            key={day.toISOString()}
-            onClick={() => handleDateClick(day)}
-            className={`w-10 h-10 flex items-center justify-center rounded-full transition-all ${retrospectDates.some(d => isSameDay(d, day)) ? "bg-green-500 text-white" : "hover:bg-gray-200"}`}
-          >
-            {format(day, "d")}
-            {retrospectDates.some(d => isSameDay(d, day)) && <CheckCircle className="w-4 h-4 absolute" />}
-          </motion.button>
-        ))}
-      </div>
+
       {selectedDate && (
-        <div className="mt-4 p-4 border rounded-lg">
-          <h3 className="font-semibold">{format(selectedDate, "yyyy-MM-dd")}</h3>
-          <p>{summary}</p>
+        <div className="w-full bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md mt-6" style={{ maxWidth: "336px" }}>
+          <SelectedDateSummary selectedDate={selectedDate} summary={summary} />
         </div>
       )}
     </div>

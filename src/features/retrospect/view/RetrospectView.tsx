@@ -47,7 +47,6 @@ export const RetrospectView = () => {
   useEffect(() => {
     const loadSession = async () => {
       const data: RetrospectSession = await fetchSession();
-      console.log(data);
       setSession(data);
 
       const initialAnswers = data.questions.reduce((acc, question, index) => {

@@ -1,4 +1,4 @@
-import { RetrospectSettingView } from "@/features/(my)/(retrospect)/setting/view/RetrospectSettingView";
+import { RetrospectSettingView } from "@/features/(my)/(options)/setting/view/RetrospectSettingView";
 
 const RetrospectSettingPage = () => {
   return (

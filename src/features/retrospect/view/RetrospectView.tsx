@@ -65,13 +65,18 @@ export const RetrospectView = () => {
   }, []);
 
   const handleAnswerChange = (value: string) => {
-    if (!session) return;
+    if (!session) {
+      return;
+    }
+
     const currentQuestion = session.questions[currentIndex];
     setAnswers((prev) => ({ ...prev, [currentQuestion.id]: value }));
   };
 
   const handleNavigation = async (skip = false) => {
-    if (!session) return;
+    if (!session) {
+      return;
+    }
 
     const currentQuestion = session.questions[currentIndex];
     await fetchSaveAnswer({

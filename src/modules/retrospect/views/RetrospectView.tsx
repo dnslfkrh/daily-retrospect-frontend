@@ -11,15 +11,18 @@ import ScoreAnswer from "../components/ScoreAnswer";
 import SingleChoiceAnswer from "../components/SingleChoiceAnswer";
 import { fetchSaveAnswer } from "../services/fetchSaveAnswer";
 import { RetrospectSessionProps } from "../types/Props";
+import { useRouter } from "next/navigation";
 
 export const RetrospectView = () => {
   const [session, setSession] = useState<RetrospectSessionProps | null>(null);
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
   const [currentIndex, setCurrentIndex] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const loadSession = async () => {
       const data: RetrospectSessionProps = await fetchSession();
+      console.log("session", data);
       setSession(data);
 
       const initialAnswers = data.questions.reduce((acc, question, index) => {
@@ -61,10 +64,13 @@ export const RetrospectView = () => {
       setCurrentIndex((prev) => prev + 1);
     } else {
       alert("회고가 저장되었습니다.");
+      router.push("/home");
     }
   };
 
-  if (!session) return <LoadingText />;
+  if (!session) {
+    return <LoadingText />;
+  }
 
   const currentQuestion = session.questions[currentIndex];
   const isGoalQuestion = currentQuestion.concept === "goal";

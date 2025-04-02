@@ -19,7 +19,7 @@ const BottomNav = () => {
           onClick={() => router.push("/home")}
         >
           <Home size={24} className="mb-1" />
-          <span className="text-xs">Home</span>
+          <span className="text-xs">홈</span>
         </button>
 
         <button
@@ -27,7 +27,7 @@ const BottomNav = () => {
           onClick={() => router.push("/retrospect")}
         >
           <ListChecks size={24} className="mb-1" />
-          <span className="text-xs">Retrospect</span>
+          <span className="text-xs">회고 작성</span>
         </button>
 
         <button
@@ -35,7 +35,7 @@ const BottomNav = () => {
           onClick={() => router.push("/goal")}
         >
           <Target size={24} className="mb-1" />
-          <span className="text-xs">Goal</span>
+          <span className="text-xs">목표 관리</span>
         </button>
 
         <button
@@ -43,7 +43,7 @@ const BottomNav = () => {
           onClick={() => router.push("/my")}
         >
           <User size={24} className="mb-1" />
-          <span className="text-xs">My</span>
+          <span className="text-xs">마이페이지</span>
         </button>
       </div>
     </nav>

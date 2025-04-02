@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ClientLayout from "@/widgets/ClientLayout";
+import ClientLayout from "@/components/layout/ClientLayout";
 
 export const viewport = {
   themeColor: "#ffffff",

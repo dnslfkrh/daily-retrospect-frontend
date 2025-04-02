@@ -1,6 +1,6 @@
 "use client";
 
-import CalendarView from "@/features/(my)/(options)/calendar/view/CalendarView"
+import CalendarView from "@/modules/calendar/views/CalendarView"
 
 const CalendarPage = () => {
   return (

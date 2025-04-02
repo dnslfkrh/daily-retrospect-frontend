@@ -1,10 +1,10 @@
 "user client";
 
-import MyView from "@/features/(my)/view/MyView"
+import MyPageView from "@/modules/my/views/MyView";
 
 const MyPage = () => {
   return (
-    <MyView />
+    <MyPageView />
   );
 };
 

@@ -1,4 +1,4 @@
-import { RetrospectView } from "@/features/retrospect/view/RetrospectView";
+import { RetrospectView } from "@/modules/retrospect/views/RetrospectView";
 
 const RetrospectPage = () => {
   return (

@@ -45,7 +45,7 @@ const MyView = () => {
       </div>
 
       <div className="space-y-4">
-        <OptionBlock title="맞춤형 회고 설정하기" link="/my/setting" emoji="📝" />
+        <OptionBlock title="맞춤형 회고 설정하기" link="/my/customize" emoji="📝" />
         <OptionBlock title="회고 작성 달력보기" link="/my/calendar" emoji="📅" />
         <OptionBlock title="목표 진행도 평가보기" link="/my/graph" emoji="📊" />
         <OptionBlock title="탈퇴하기" link="/my/delete" emoji="❌" />

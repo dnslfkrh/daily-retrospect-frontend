@@ -18,7 +18,7 @@ export default function LoginButton() {
     }
 
     const loginUrl = `https://${COGNITO_DOMAIN}.auth.${REGION}.amazoncognito.com/login` +
-      `?client_id=${CLIENT_ID}&response_type=code&scope=email+openid+profile` +
+      `?client_id=${CLIENT_ID}&response_type=code&scope=email+openid+profile+aws.cognito.signin.user.admin` +
       `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}`;
 
     router.push(loginUrl);

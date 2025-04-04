@@ -127,7 +127,7 @@ const GoalEvaluationView = () => {
           <button
             key={p}
             className={`px-4 py-2 text-sm rounded-md transition-colors duration-200 ${period === p
-              ? "bg-gray-800 text-white dark:bg-gray-500"
+              ? "bg-black text-white dark:bg-gray-500"
               : "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-300"
               }`}
             onClick={() => setPeriod(p)}

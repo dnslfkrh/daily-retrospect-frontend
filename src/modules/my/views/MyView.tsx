@@ -31,7 +31,7 @@ const MyView = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <div className="p-8 bg-white dark:bg-gray-900 min-h-screen">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-xl font-bold text-gray-800 dark:text-white">
           {userName ? `안녕하세요, ${userName}님` : "불러오는 중..."}

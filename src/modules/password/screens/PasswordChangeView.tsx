@@ -2,7 +2,7 @@
 
 import { usePasswordChange } from "../hooks/usePasswordChange";
 
-const PasswordChangeView = () => {
+const PasswordChangeScreen = () => {
   const {
     isSocialUser,
     currentPassword,
@@ -65,4 +65,4 @@ const PasswordChangeView = () => {
   );
 };
 
-export default PasswordChangeView;
+export default PasswordChangeScreen;

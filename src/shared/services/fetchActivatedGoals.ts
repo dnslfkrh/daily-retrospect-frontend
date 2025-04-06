@@ -1,6 +1,6 @@
 import { api } from "@/common/services/api";
 
-export const fethcActivatedGoals = async () => {
+export const fetchActivatedGoals = async () => {
   try {
     const response = await api.get("/goal/activated");
     return response.data;

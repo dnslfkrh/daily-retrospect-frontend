@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { GoalEvaluationPeriod } from "../enums/goalEvaluation";
+import { GoalEvaluationPeriod } from "../../../shared/enums/goalEvaluation";
 import PeriodSelector from "../components/PeriodSelector";
 import GoalScoreChart from "../components/GoalScoreChart";
 import GoalFeedback from "../components/GoalFeedback";
 import { useGoalEvaluation } from "../hooks/useGoalEvaluation";
 
-const GoalEvaluationView = () => {
+const GoalEvaluationScreen = () => {
   const [period, setPeriod] = useState<GoalEvaluationPeriod>(GoalEvaluationPeriod.OneMonth);
   const { chartData, averageScore } = useGoalEvaluation(period);
 
@@ -21,4 +21,4 @@ const GoalEvaluationView = () => {
   );
 };
 
-export default GoalEvaluationView;
+export default GoalEvaluationScreen;

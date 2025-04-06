@@ -1,8 +1,8 @@
-import { RetrospectCustomizeView } from "@/modules/customize/screens/RetrospectSettingView";
+import { RetrospectCustomizeScreen } from "@/modules/customize/screens/RetrospectSettingView";
 
 const RetrospectSettingPage = () => {
   return (
-    <RetrospectCustomizeView />
+    <RetrospectCustomizeScreen />
   );
 };
 

@@ -1,5 +1,5 @@
 import { getWeekOfMonth } from "date-fns";
-import { GoalEvaluationPeriod } from "../enums/goalEvaluation";
+import { GoalEvaluationPeriod } from "../../../shared/enums/goalEvaluation";
 import { GoalScoreProps } from "../types/Props";
 import { getMonthName } from "./getMonthName";
 

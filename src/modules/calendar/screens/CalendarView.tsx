@@ -7,7 +7,7 @@ import DayButton from "../components/DayButton";
 import SelectedDateSummary from "../components/SelectedDateSummary";
 import { isSameDay } from "date-fns";
 
-const CalendarView = () => {
+const CalendarScreen = () => {
   const {
     currentMonth,
     daysInMonth,
@@ -49,4 +49,4 @@ const CalendarView = () => {
   );
 };
 
-export default CalendarView;
+export default CalendarScreen;

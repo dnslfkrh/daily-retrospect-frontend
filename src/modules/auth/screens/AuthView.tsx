@@ -3,7 +3,7 @@
 import FullHeightContainer from "@/common/components/FullHeightContainer";
 import LoginButton from "../components/LoginButton";
 
-const AuthView = () => {
+const AuthScreen = () => {
   return (
     <FullHeightContainer>
       <LoginButton />
@@ -11,4 +11,4 @@ const AuthView = () => {
   );
 };
 
-export default AuthView;
+export default AuthScreen;

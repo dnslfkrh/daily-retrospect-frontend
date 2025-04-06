@@ -1,4 +1,4 @@
-import { GoalEvaluationPeriod } from "../enums/goalEvaluation";
+import { GoalEvaluationPeriod } from "../../../shared/enums/goalEvaluation";
 
 interface Props {
   period: GoalEvaluationPeriod;

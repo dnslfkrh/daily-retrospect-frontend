@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fethcActivatedGoals } from "../../../shared/services/fetchActivatedGoals";
+import { fetchActivatedGoals } from "../../../shared/services/fetchActivatedGoals";
 import { fetchFinishedGoals } from "../services/fetchFinishedGoals";
 import { fetchCreateGoal } from "../services/fetchCreateGoal";
 import { GoalProps } from "../types/Props";
@@ -11,7 +11,7 @@ export const useGoalManager = () => {
 
   useEffect(() => {
     const loadGoals = async () => {
-      const data = await fethcActivatedGoals();
+      const data = await fetchActivatedGoals();
       setGoals(data);
     };
     loadGoals();

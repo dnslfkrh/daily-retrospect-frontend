@@ -1,8 +1,8 @@
-import { RetrospectView } from "@/modules/retrospect/screens/RetrospectView";
+import RetrospectScreen from "@/modules/retrospect/screens/RetrospectView";
 
 const RetrospectPage = () => {
   return (
-    <RetrospectView />
+    <RetrospectScreen />
   );
 };
 

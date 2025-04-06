@@ -1,8 +1,8 @@
-import AuthView from "@/modules/auth/screens/AuthView";
+import AuthScreen from "@/modules/auth/screens/AuthView";
 
 const AuthPage = () => {
   return (
-    <AuthView />
+    <AuthScreen />
   );
 };
 

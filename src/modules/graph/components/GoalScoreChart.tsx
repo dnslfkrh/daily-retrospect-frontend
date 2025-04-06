@@ -1,6 +1,6 @@
 "use client";
 import { Line } from "react-chartjs-2";
-import { GoalEvaluationPeriod } from "../enums/goalEvaluation";
+import { GoalEvaluationPeriod } from "../../../shared/enums/goalEvaluation";
 import { useTheme } from "next-themes";
 import {
   Chart as ChartJS,

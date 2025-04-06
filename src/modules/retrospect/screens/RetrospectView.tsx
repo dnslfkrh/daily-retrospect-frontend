@@ -9,7 +9,7 @@ import RetrospectQuestionBlock from "../components/RetrospectQuestionBlock";
 import { useRetrospectNavigation } from "../hooks/useRetrospectNavigation";
 import { useRetrospectSession } from "../hooks/useRetrospectSession";
 
-export const RetrospectView = () => {
+const RetrospectScreen = () => {
   const { session, answers, setAnswers } = useRetrospectSession();
   const { currentIndex, handleAnswerChange, handleNavigation } = useRetrospectNavigation(session, answers);
 
@@ -60,3 +60,5 @@ export const RetrospectView = () => {
     </FullHeightContainer>
   );
 };
+
+export default RetrospectScreen;

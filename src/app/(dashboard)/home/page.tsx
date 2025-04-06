@@ -1,9 +1,7 @@
+import HomeScreen from "@/modules/home/screens/HomeScreen";
+
 const HomePage = () => {
-  return (
-    <div>
-      <h1>Home Page</h1>
-    </div>
-  );
+  return <HomeScreen />;
 };
 
 export default HomePage;

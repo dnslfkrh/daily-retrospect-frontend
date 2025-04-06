@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { handleCognitoCallback } from "../utils/handleCognitoCallback";
 
-const CallbackView = () => {
+const CallbackScreen = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -18,4 +18,4 @@ const CallbackView = () => {
   );
 };
 
-export default CallbackView;
+export default CallbackScreen;

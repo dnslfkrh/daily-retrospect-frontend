@@ -1,10 +1,10 @@
 "use client";
 
-import CalendarView from "@/modules/calendar/screens/CalendarView"
+import CalendarScreen from "@/modules/calendar/screens/CalendarView"
 
 const CalendarPage = () => {
   return (
-    <CalendarView />
+    <CalendarScreen />
   );
 };
 

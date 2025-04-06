@@ -6,7 +6,7 @@ import GoalModal from "../components/GoalModal";
 import GoalList from "../components/GoalList";
 import { useGoalManager } from "../hooks/useGoalManager";
 
-const GoalView = () => {
+const GoalScreen = () => {
   const {
     goals,
     finishedGoals,
@@ -49,4 +49,4 @@ const GoalView = () => {
   );
 };
 
-export default GoalView;
+export default GoalScreen;

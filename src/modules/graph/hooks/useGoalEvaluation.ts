@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { GoalEvaluationPeriod } from "../enums/goalEvaluation";
-import { fetchGetGoalScores } from "../services/fetchGetGoalScores";
+import { GoalEvaluationPeriod } from "../../../shared/enums/goalEvaluation";
 import { GoalScoreProps } from "../types/Props";
 import { processScoresForChart } from "../utils/processScoresForChart";
 import toast from "react-hot-toast";
+import { fetchGetGoalScores } from "@/shared/services/fetchGetGoalScores";
 
 export const useGoalEvaluation = (period: GoalEvaluationPeriod) => {
   const [scores, setScores] = useState<GoalScoreProps[]>([]);

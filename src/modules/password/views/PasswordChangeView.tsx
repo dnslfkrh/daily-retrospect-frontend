@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { fetchChangePassword } from "../services/fetchChangePassword";
 import { fetchUserInfo } from "../services/fetchUserInfo";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const PasswordChangeView = () => {
   const [isSocialUser, setIsSocialUser] = useState<boolean | null>(null);
@@ -28,7 +29,7 @@ const PasswordChangeView = () => {
 
   const handleChangePassword = async () => {
     if (isSocialUser) {
-      alert("소셜 로그인 사용자는 비밀번호를 변경할 수 없습니다.");
+      toast.error("소셜 로그인 사용자는 비밀번호를 변경할 수 없습니다.");
       return;
     }
 
@@ -43,6 +44,8 @@ const PasswordChangeView = () => {
       setError("");
       setCurrentPassword("");
       setNewPassword("");
+
+      toast.success("비밀번호가 성공적으로 변경되었습니다.");
 
       router.push("/my");
     } catch (error: any) {

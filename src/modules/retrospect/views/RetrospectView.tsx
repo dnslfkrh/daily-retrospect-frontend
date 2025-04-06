@@ -12,6 +12,7 @@ import SingleChoiceAnswer from "../components/SingleChoiceAnswer";
 import { fetchSaveAnswer } from "../services/fetchSaveAnswer";
 import { RetrospectSessionProps } from "../types/Props";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export const RetrospectView = () => {
   const [session, setSession] = useState<RetrospectSessionProps | null>(null);
@@ -63,8 +64,11 @@ export const RetrospectView = () => {
     if (currentIndex < session.questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
-      alert("회고가 저장되었습니다.");
-      router.push("/home");
+      toast.success("회고가 저장되었습니다.");
+      setTimeout(() => {
+        router.push("/home");
+      }
+        , 1500);
     }
   };
 

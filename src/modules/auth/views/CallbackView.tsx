@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const CallbackView = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const CallbackView = () => {
         router.push("/home");
       } else {
         console.error("토큰이 없습니다.");
-        alert("로그인에 실패했습니다. 다시 시도해주세요.");
+        toast.error("로그인에 실패했습니다.");
         router.push("/auth");
       }
     };

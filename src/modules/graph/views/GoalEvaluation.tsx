@@ -95,7 +95,7 @@ const GoalEvaluationView = () => {
 
     sortedKeys.forEach(key => {
       const [year, month, week] = key.split(/[-]/);
-      let label: string = '';
+      let label: string = "";
       switch (period) {
         case GoalEvaluationPeriod.OneYear:
         case GoalEvaluationPeriod.SixMonths:

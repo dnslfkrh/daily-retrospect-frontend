@@ -5,6 +5,10 @@ interface GoalFeedbackProps {
 }
 
 const GoalFeedback = ({ averageScore }: GoalFeedbackProps) => {
+  if (averageScore <= 0) {
+    return null;
+  }
+
   const feedbacks = getFeedback(averageScore);
 
   return (

@@ -8,6 +8,7 @@ import { fetchRetrospectSetting } from "../services/fetchRetroSpectSetting";
 import { UpdateSettingProps } from "../types/Props";
 import { fetchUpdateSetting } from "../services/fetchUpdateSetting";
 import { OptionSelector } from "../components/OptionSelector";
+import toast from "react-hot-toast";
 
 const concepts = [
   { label: "Emotional", value: RetrospectConcept.Emotion, description: "기분과 감정 위주로 회고를 작성합니다." },
@@ -49,9 +50,9 @@ export const RetrospectCustomizeView = () => {
         volume: selectedVolume,
       };
       await fetchUpdateSetting(settings);
-      alert("설정이 저장되었습니다.");
+      toast.success("설정이 저장되었습니다.");
     } catch (error) {
-      alert("설정을 저장하는 중 오류가 발생했습니다.");
+      toast.error("설정 저장에 실패했습니다.");
     }
   };
 

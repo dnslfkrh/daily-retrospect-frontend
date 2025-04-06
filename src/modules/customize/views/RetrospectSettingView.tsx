@@ -1,14 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 import FullHeightContainer from "@/components/ui/FullHeightContainer";
 import { RetrospectConcept, RetrospectVolume } from "../enums/enums";
-import { fetchRetrospectSetting } from "../services/fetchRetroSpectSetting";
-import { UpdateSettingProps } from "../types/Props";
 import { fetchUpdateSetting } from "../services/fetchUpdateSetting";
 import { OptionSelector } from "../components/OptionSelector";
-import toast from "react-hot-toast";
+import { UpdateSettingProps } from "../types/Props";
+import { useRetrospectSettings } from "../hooks/useRetrospectSettings";
 
 const concepts = [
   { label: "Emotional", value: RetrospectConcept.Emotion, description: "기분과 감정 위주로 회고를 작성합니다." },
@@ -23,25 +22,13 @@ const volumes = [
 ];
 
 export const RetrospectCustomizeView = () => {
-  const [selectedConcept, setSelectedConcept] = useState<RetrospectConcept>(RetrospectConcept.Emotion);
-  const [selectedVolume, setSelectedVolume] = useState<RetrospectVolume>(RetrospectVolume.Standard);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        const data = await fetchRetrospectSetting();
-        setSelectedConcept(data.concept);
-        setSelectedVolume(data.volume);
-      } catch (error) {
-        console.error("Error fetching retrospect settings:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSettings();
-  }, []);
+  const {
+    selectedConcept,
+    setSelectedConcept,
+    selectedVolume,
+    setSelectedVolume,
+    loading,
+  } = useRetrospectSettings();
 
   const handleSave = async () => {
     try {
@@ -59,7 +46,7 @@ export const RetrospectCustomizeView = () => {
   return (
     <FullHeightContainer>
       <motion.div
-        className="w-full flex flex-col items-center px-2bg-white dark:bg-gray-900"
+        className="w-full flex flex-col items-center px-2 bg-white dark:bg-gray-900"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
@@ -71,7 +58,6 @@ export const RetrospectCustomizeView = () => {
               나의 회고 스타일
             </h1>
 
-            {/* 컨셉 선택 */}
             <OptionSelector
               title="회고 컨셉"
               options={concepts}
@@ -79,7 +65,6 @@ export const RetrospectCustomizeView = () => {
               setSelectedOption={setSelectedConcept}
             />
 
-            {/* 볼륨 선택 */}
             <OptionSelector
               title="질문 개수"
               options={volumes}
@@ -87,7 +72,6 @@ export const RetrospectCustomizeView = () => {
               setSelectedOption={setSelectedVolume}
             />
 
-            {/* 저장 버튼 */}
             <motion.button
               onClick={handleSave}
               whileHover={{ scale: 1.05 }}

@@ -1,52 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Plus } from "lucide-react";
 import GoalModal from "../components/GoalModal";
 import GoalList from "../components/GoalList";
-import { fethcActivatedGoals } from "../services/fetchActivatedGoals";
-import { fetchFinishedGoals } from "../services/fetchFinishedGoals";
-import { fetchCreateGoal } from "../services/fetchCreateGoal";
-import { GoalProps } from "../types/Props";
+import { useGoalManager } from "../hooks/useGoalManager";
 
 const GoalView = () => {
-  const [goals, setGoals] = useState<GoalProps[]>([]);
-  const [finishedGoals, setFinishedGoals] = useState<GoalProps[]>([]);
+  const {
+    goals,
+    finishedGoals,
+    showCompleted,
+    addGoal,
+    toggleCompleted,
+  } = useGoalManager();
   const [showModal, setShowModal] = useState(false);
-  const [showCompleted, setShowCompleted] = useState(false);
-
-  const getActivatedGoals = async () => {
-    const activatedGoals = await fethcActivatedGoals();
-    console.log("Activated goals: ", activatedGoals);
-    return activatedGoals;
-  };
-
-  const getFinishedGoals = async () => {
-    const finishedGoals = await fetchFinishedGoals();
-    console.log("finishedGoals: ", finishedGoals);
-    return finishedGoals;
-  };
-
-  useEffect(() => {
-    const loadGoals = async () => {
-      const data = await getActivatedGoals();
-      setGoals(data);
-    };
-    loadGoals();
-  }, []);
-
-  const handleAdd = async (newGoal: GoalProps) => {
-    await fetchCreateGoal(newGoal);
-    setGoals((prev) => [...prev, { ...newGoal, id: prev.length + 1 }]);
-  };
-
-  const toggleCompleted = async () => {
-    if (!showCompleted && finishedGoals.length === 0) {
-      const data = await getFinishedGoals();
-      setFinishedGoals(data);
-    }
-    setShowCompleted((prev) => !prev);
-  };
 
   return (
     <div className="px-4 w-full min-h-screen bg-white dark:bg-gray-900 flex flex-col pb-6 pt-4">
@@ -62,14 +30,11 @@ const GoalView = () => {
       <GoalList goals={goals} />
 
       {/* 지난 목표 보기 토글 버튼 */}
-      <button
-        onClick={toggleCompleted}
-        className="mt-4 text-gray-500 hover:underline dark:text-gray-200"
-      >
+      <button onClick={toggleCompleted} className="mt-4 text-gray-500 hover:underline dark:text-gray-200">
         {showCompleted ? "숨기기" : "지난 목표 보기"}
       </button>
 
-      {/* 지난 목표 리스트 (토글 상태에 따라 표시) */}
+      {/* 지난 목표 리스트 */}
       {showCompleted && (
         <>
           <h2 className="text-md font-medium text-gray-700 dark:text-gray-300 mt-4">지난 목표</h2>
@@ -77,7 +42,9 @@ const GoalView = () => {
         </>
       )}
 
-      {showModal && <GoalModal goal={null} onClose={() => setShowModal(false)} onSave={handleAdd} />}
+      {showModal && (
+        <GoalModal goal={null} onClose={() => setShowModal(false)} onSave={addGoal} />
+      )}
     </div>
   );
 };

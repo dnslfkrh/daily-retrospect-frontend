@@ -1,30 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import jwtDecode from "jsonwebtoken";
+import { useUserName } from "../hooks/useUserName";
 import OptionBlock from "../components/MyPageOptionBlock";
 
-const getUserNameFromToken = (idToken: string | null): string | null => {
-  if (!idToken) {
-    return null;
-  }
-  try {
-    const decoded: any = jwtDecode.decode(idToken);
-    return decoded?.name || "알 수 없는 사용자";
-  } catch (error) {
-    console.error("토큰 디코딩 오류:", error);
-    return "알 수 없는 사용자";
-  }
-};
-
 const MyView = () => {
-  const [userName, setUserName] = useState<string | null>(null);
-
-  useEffect(() => {
-    const idToken = localStorage.getItem("id_token");
-    const name = getUserNameFromToken(idToken);
-    setUserName(name);
-  }, []);
+  const userName = useUserName();
 
   const handleLogout = () => {
     window.location.href = `${process.env.NEXT_PUBLIC_COGNITO_LOGOUT_URL}`;

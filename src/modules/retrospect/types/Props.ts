@@ -6,12 +6,16 @@ export interface SaveAnswerProps {
   answer: string;
 }
 
-interface RetrospectAnswerProps {
+export interface AnswerProps {
+  answer: string;
+}
+
+interface RetrospectAnswerProps extends AnswerProps {
   id: number;
   answer_type: AnswerType;
-  answer: string;
   created_at: string;
   updated_at: string;
+  question_id: number;
 }
 
 interface RetrospectQuestionProps {

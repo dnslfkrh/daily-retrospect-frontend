@@ -67,8 +67,7 @@ export const RetrospectView = () => {
       toast.success("회고가 저장되었습니다.");
       setTimeout(() => {
         router.push("/home");
-      }
-        , 1500);
+      }, 1500);
     }
   };
 

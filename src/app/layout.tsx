@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ClientLayout from "@/components/layout/ClientLayout";
+import ClientLayout from "@/common/layouts/ClientLayout";
 import { ThemeProvider } from "next-themes";
 
 export const viewport = {

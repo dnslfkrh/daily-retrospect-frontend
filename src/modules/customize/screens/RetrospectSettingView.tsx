@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
-import FullHeightContainer from "@/components/ui/FullHeightContainer";
+import FullHeightContainer from "@/common/components/FullHeightContainer";
 import { RetrospectConcept, RetrospectVolume } from "../enums/enums";
 import { fetchUpdateSetting } from "../services/fetchUpdateSetting";
 import { OptionSelector } from "../components/OptionSelector";

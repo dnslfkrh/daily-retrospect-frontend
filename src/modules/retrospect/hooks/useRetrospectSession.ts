@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnswerProps, RetrospectSessionProps } from "../types/Props";
-import { fetchSession } from "../services/fetchSession";
+import { fetchSession } from "../../../shared/services/fetchSession";
 
 type AnswerMap = {
   [questionId: number]: string;

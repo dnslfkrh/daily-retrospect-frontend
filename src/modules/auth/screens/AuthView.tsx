@@ -1,6 +1,6 @@
 "use client";
 
-import FullHeightContainer from "@/components/ui/FullHeightContainer";
+import FullHeightContainer from "@/common/components/FullHeightContainer";
 import LoginButton from "../components/LoginButton";
 
 const AuthView = () => {

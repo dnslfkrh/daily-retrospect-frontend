@@ -1,4 +1,4 @@
-import { api } from "@/shared/apis/api";
+import { api } from "@/common/services/api";
 import { GoalEvaluationPeriod } from "../enums/goalEvaluation";
 import { GoalScoreProps } from "../types/Props";
 

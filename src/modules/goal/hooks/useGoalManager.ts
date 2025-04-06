@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fethcActivatedGoals } from "../services/fetchActivatedGoals";
+import { fethcActivatedGoals } from "../../../shared/services/fetchActivatedGoals";
 import { fetchFinishedGoals } from "../services/fetchFinishedGoals";
 import { fetchCreateGoal } from "../services/fetchCreateGoal";
 import { GoalProps } from "../types/Props";

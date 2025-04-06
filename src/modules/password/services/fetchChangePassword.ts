@@ -1,4 +1,4 @@
-import { api } from "@/shared/apis/api"
+import { api } from "@/common/services/api"
 
 export const fetchChangePassword = async (previousPassword: string, newPassword: string) => {
   try {

@@ -6,9 +6,9 @@ import { usePathname } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import { useTheme } from "next-themes";
 
-const TopNav = dynamic(() => import("@/components/layout/TopNav"), { ssr: false });
-const BottomNav = dynamic(() => import("@/components/layout/BottomNav"), { ssr: false });
-const Loading = dynamic(() => import("@/components/ui/Loading"), { ssr: false });
+const TopNav = dynamic(() => import("@/common/layouts/TopNav"), { ssr: false });
+const BottomNav = dynamic(() => import("@/common/layouts/BottomNav"), { ssr: false });
+const Loading = dynamic(() => import("@/common/components/Loading"), { ssr: false });
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();

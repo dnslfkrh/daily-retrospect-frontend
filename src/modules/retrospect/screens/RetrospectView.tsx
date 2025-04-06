@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import FullHeightContainer from "@/components/ui/FullHeightContainer";
-import LoadingText from "@/components/ui/LoadingText";
+import FullHeightContainer from "@/common/components/FullHeightContainer";
+import LoadingText from "@/common/components/LoadingText";
 import GoalListBlock from "../components/GoalListBlock";
 import RetrospectNavigationButtons from "../components/RetrospectNavigationButtons";
 import RetrospectQuestionBlock from "../components/RetrospectQuestionBlock";

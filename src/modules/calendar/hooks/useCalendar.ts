@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { subMonths, addMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isSameMonth, getDay } from "date-fns";
-import { fetchRetrospectDates } from "../services/fetchRetrospectDates";
+import { fetchRetrospectDates } from "../../../shared/services/fetchRetrospectDates";
 import { fetchSummary } from "../services/fetchSummary";
 
 export const useCalendar = () => {

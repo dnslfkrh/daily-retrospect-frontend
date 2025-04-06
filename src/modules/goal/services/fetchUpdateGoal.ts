@@ -1,4 +1,4 @@
-import { api } from "@/shared/apis/api";
+import { api } from "@/common/services/api";
 import { GoalProps } from "@/modules/goal/types/Props";
 
 export const fetchUpdateGoal = async (updatedGoal: GoalProps) => {

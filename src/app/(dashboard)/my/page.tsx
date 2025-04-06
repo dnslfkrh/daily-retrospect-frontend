@@ -1,6 +1,6 @@
 "user client";
 
-import MyPageView from "@/modules/my/views/MyView";
+import MyPageView from "@/modules/my/screens/MyView";
 
 const MyPage = () => {
   return (

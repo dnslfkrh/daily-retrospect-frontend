@@ -1,4 +1,4 @@
-import CallbackView from "@/modules/auth/views/CallbackView";
+import CallbackView from "@/modules/auth/screens/CallbackView";
 
 const CallbackPage = () => {
   return (

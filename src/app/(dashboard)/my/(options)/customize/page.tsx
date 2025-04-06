@@ -1,4 +1,4 @@
-import { RetrospectCustomizeView } from "@/modules/customize/views/RetrospectSettingView";
+import { RetrospectCustomizeView } from "@/modules/customize/screens/RetrospectSettingView";
 
 const RetrospectSettingPage = () => {
   return (

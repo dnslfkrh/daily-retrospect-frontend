@@ -1,4 +1,4 @@
-import GoalView from "@/modules/goal/views/GoalView";
+import GoalView from "@/modules/goal/screens/GoalView";
 
 const GoalPage = () => {
   return (

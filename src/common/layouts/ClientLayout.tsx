@@ -10,7 +10,7 @@ const TopNav = dynamic(() => import("@/common/layouts/TopNav"), { ssr: false });
 const BottomNav = dynamic(() => import("@/common/layouts/BottomNav"), { ssr: false });
 const Loading = dynamic(() => import("@/common/components/Loading"), { ssr: false });
 
-export default function ClientLayout({ children }: { children: ReactNode }) {
+const ClientLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
   const { resolvedTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
@@ -35,7 +35,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
   }, [isHiddenOverflow]);
 
   return (
-    <div className="w-full max-w-[450px] flex flex-col h-full min-h-screen relative">
+    <div className="w-full flex flex-col h-full min-h-screen relative">
       <TopNav />
 
       <div className={`flex flex-col flex-grow pb-19 ${pathname === "/auth" ? "" : "mt-14"}`}>
@@ -63,3 +63,6 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
+
+
+export default ClientLayout;

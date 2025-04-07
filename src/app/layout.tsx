@@ -19,12 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className="antialiased flex justify-center items-center bg-white text-black min-h-screen"
+        className="antialiased bg-white text-black min-h-screen flex justify-center"
         suppressHydrationWarning
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ClientLayout>{children}</ClientLayout>
-        </ThemeProvider>
+        <div className="w-full max-w-[450px] min-h-screen relative">
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ClientLayout>{children}</ClientLayout>
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );

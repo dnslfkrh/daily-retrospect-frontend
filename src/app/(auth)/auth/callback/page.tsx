@@ -1,4 +1,4 @@
-import CallbackScreen from "@/modules/auth/screens/CallbackView";
+import CallbackScreen from "@/modules/auth/screens/CallbackScreen";
 
 const CallbackPage = () => {
   return (

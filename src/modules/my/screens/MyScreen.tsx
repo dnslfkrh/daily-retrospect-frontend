@@ -2,39 +2,7 @@
 
 import { useUserName } from "../hooks/useUserName";
 import Link from "next/link";
-import clsx from "clsx";
-
-const CardGroup = ({
-  children,
-}: {
-  children: React.ReactNode[];
-}) => {
-  return (
-    <div className="space-y-0">
-      {children.map((child, index) => {
-        const isFirst = index === 0;
-        const isLast = index === children.length - 1;
-
-        return (
-          <div
-            key={index}
-            className={clsx(
-              "p-4 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 transition hover:bg-gray-200 dark:hover:bg-gray-700",
-              {
-                "rounded-t-2xl": isFirst && !isLast,
-                "rounded-b-2xl": isLast && !isFirst,
-                "rounded-2xl": isFirst && isLast,
-                "border-t-0": !isFirst,
-              }
-            )}
-          >
-            {child}
-          </div>
-        );
-      })}
-    </div>
-  );
-};
+import CardGroup from "@/shared/components/CardGroup";
 
 const MyScreen = () => {
   const userName = useUserName();
@@ -70,7 +38,7 @@ const MyScreen = () => {
               </Link>,
               <Link href="/my/calendar" key="calendar">
                 <div className="flex items-center">
-                  <span className="mr-3">📅</span> 회고 작성 달력보기
+                  <span className="mr-3">📅</span> 회고 작성 달력 보기
                 </div>
               </Link>,
             ]}
@@ -84,7 +52,7 @@ const MyScreen = () => {
             {[
               <Link href="/my/graph" key="graph">
                 <div className="flex items-center">
-                  <span className="mr-3">📊</span> 목표 진행도 평가보기
+                  <span className="mr-3">📊</span> 목표 진행도 평가 보기
                 </div>
               </Link>,
             ]}

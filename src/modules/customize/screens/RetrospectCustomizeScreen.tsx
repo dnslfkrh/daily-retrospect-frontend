@@ -21,7 +21,7 @@ const volumes = [
   { label: "Deep", value: RetrospectVolume.Deep, description: "회고를 자세하게 작성합니다." },
 ];
 
-export const RetrospectCustomizeScreen = () => {
+const RetrospectCustomizeScreen = () => {
   const {
     selectedConcept,
     setSelectedConcept,
@@ -86,3 +86,5 @@ export const RetrospectCustomizeScreen = () => {
     </FullHeightContainer>
   );
 };
+
+export default RetrospectCustomizeScreen;

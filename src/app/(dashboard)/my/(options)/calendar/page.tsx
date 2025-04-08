@@ -1,6 +1,6 @@
 "use client";
 
-import CalendarScreen from "@/modules/calendar/screens/CalendarView"
+import CalendarScreen from "@/modules/calendar/screens/CalendarScreen"
 
 const CalendarPage = () => {
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import GoalEvaluationScreen from '@/modules/graph/screens/GoalEvaluation';
+import GoalEvaluationScreen from '@/modules/graph/screens/GoalEvaluationScreen';
 
 const GraphPage = () => {
   return (

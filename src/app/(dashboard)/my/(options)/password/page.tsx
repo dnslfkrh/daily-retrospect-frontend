@@ -1,4 +1,4 @@
-import PasswordChangeScreen from "@/modules/password/screens/PasswordChangeView";
+import PasswordChangeScreen from "@/modules/password/screens/PasswordChangeScreen";
 
 const PasswordPage = () => {
   return <PasswordChangeScreen />;

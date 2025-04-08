@@ -6,8 +6,8 @@ import FullHeightContainer from "@/common/components/FullHeightContainer";
 import { RetrospectConcept, RetrospectVolume } from "../enums/enums";
 import { fetchUpdateSetting } from "../services/fetchUpdateSetting";
 import { OptionSelector } from "../components/OptionSelector";
-import { UpdateSettingProps } from "../types/Props";
 import { useRetrospectSettings } from "../hooks/useRetrospectSettings";
+import { UpdateSettingProps } from "../types/setting";
 
 const concepts = [
   { label: "Emotional", value: RetrospectConcept.Emotion, description: "기분과 감정 위주로 회고를 작성합니다." },

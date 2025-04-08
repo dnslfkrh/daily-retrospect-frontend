@@ -1,5 +1,5 @@
 import { api } from "@/common/services/api";
-import { SaveAnswerProps } from "../types/Props";
+import { SaveAnswerProps } from "../types/save-answer";
 
 export const fetchSaveAnswer = async ({ sessionId, questionId, answer }: SaveAnswerProps) => {
   try {

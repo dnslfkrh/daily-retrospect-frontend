@@ -12,11 +12,6 @@ const emojiKeywordMap: { [key: string]: { [emoji: string]: string } } = {
   "오늘 나의 기분은?": { "😀": "happy", "😢": "sad", "😡": "angry", "😌": "calm" },
 };
 
-const getEmojiFromKeyword = (question: string, keyword: string): string => {
-  const map = emojiKeywordMap[question] || {};
-  return Object.keys(map).find((emoji) => map[emoji] === keyword) || keyword;
-};
-
 const getKeywordFromEmoji = (question: string, emoji: string): string => {
   return emojiKeywordMap[question]?.[emoji] || emoji;
 };

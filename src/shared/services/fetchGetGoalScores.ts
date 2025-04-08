@@ -1,6 +1,6 @@
 import { api } from "@/common/services/api";
 import { GoalEvaluationPeriod } from "@/shared/enums/goalEvaluation";
-import { GoalScoreProps } from "@/modules/graph/types/Props";
+import { GoalScoreProps } from "@/modules/graph/types/goal-score";
 
 export const fetchGetGoalScores = async (period: GoalEvaluationPeriod): Promise<GoalScoreProps[]> => {
   try {

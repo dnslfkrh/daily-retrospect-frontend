@@ -1,6 +1,6 @@
 import { getWeekOfMonth } from "date-fns";
 import { GoalEvaluationPeriod } from "../../../shared/enums/goalEvaluation";
-import { GoalScoreProps } from "../types/Props";
+import { GoalScoreProps } from "../types/goal-score";
 import { getMonthName } from "./getMonthName";
 
 export const processScoresForChart = (

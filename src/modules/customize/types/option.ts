@@ -1,12 +1,12 @@
-type Option<T> = {
+interface OptionProps<T> {
   label: string;
   value: T;
   description: string;
 };
 
-export type OptionSelectorType<T> = {
+export interface OptionSelectorProps<T> {
   title: string;
-  options: Option<T>[];
+  options: OptionProps<T>[];
   selectedOption: T;
   setSelectedOption: (value: T) => void;
 };

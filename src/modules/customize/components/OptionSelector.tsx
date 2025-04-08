@@ -1,14 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { OptionSelectorType } from "../types/Type";
-
-
+import { OptionSelectorProps } from "../types/option";
 
 export const OptionSelector = <T,>({
   title,
   options,
   selectedOption,
   setSelectedOption,
-}: OptionSelectorType<T>) => {
+}: OptionSelectorProps<T>) => {
   return (
     <div className="w-full mt-8 mb-4">
       <h2 className="text-lg font-medium mb-4 text-center text-gray-800 dark:text-gray-300">

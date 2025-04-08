@@ -5,7 +5,7 @@ import { fetchRetrospectDates } from "@/shared/services/fetchRetrospectDates";
 import { fetchGetGoalScores } from "@/shared/services/fetchGetGoalScores";
 import { fetchLastSummary } from "../services/fetchLastSummary";
 import { GoalEvaluationPeriod } from "@/shared/enums/goalEvaluation";
-import { GoalScoreProps } from "@/modules/graph/types/Props";
+import { GoalScoreProps } from "@/modules/graph/types/goal-score";
 
 export const useHomeData = () => {
   const [loading, setLoading] = useState(true);

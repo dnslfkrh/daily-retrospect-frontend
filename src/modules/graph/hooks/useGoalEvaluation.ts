@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GoalEvaluationPeriod } from "../../../shared/enums/goalEvaluation";
-import { GoalScoreProps } from "../types/Props";
+import { GoalScoreProps } from "../types/goal-score";
 import { processScoresForChart } from "../utils/processScoresForChart";
 import toast from "react-hot-toast";
 import { fetchGetGoalScores } from "@/shared/services/fetchGetGoalScores";

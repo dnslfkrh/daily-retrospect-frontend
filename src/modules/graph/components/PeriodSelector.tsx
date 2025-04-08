@@ -1,11 +1,7 @@
 import { GoalEvaluationPeriod } from "../../../shared/enums/goalEvaluation";
+import { PeriodProps } from "../types/period";
 
-interface Props {
-  period: GoalEvaluationPeriod;
-  setPeriod: (p: GoalEvaluationPeriod) => void;
-}
-
-const PeriodSelector = ({ period, setPeriod }: Props) => {
+const PeriodSelector = ({ period, setPeriod }: PeriodProps) => {
   return (
     <div className="flex justify-center gap-2 mb-6">
       {Object.values(GoalEvaluationPeriod).map(p => (

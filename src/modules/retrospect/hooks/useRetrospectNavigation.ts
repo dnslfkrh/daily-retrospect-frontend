@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { RetrospectSessionProps } from "../types/Props";
 import { fetchSaveAnswer } from "../services/fetchSaveAnswer";
+import { RetrospectSessionProps } from "../types/session";
 
 export const useRetrospectNavigation = (
   session: RetrospectSessionProps | null,

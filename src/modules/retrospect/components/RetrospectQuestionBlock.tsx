@@ -3,15 +3,9 @@ import TextAnswer from "./TextAnswer";
 import ScoreAnswer from "./ScoreAnswer";
 import SingleChoiceAnswer from "./SingleChoiceAnswer";
 import { AnswerType } from "../enums/retrospect.enum";
+import { QuestionBlockProps } from "../types/question-block";
 
-type Props = {
-  type: AnswerType;
-  value: string;
-  onChange: (value: string) => void;
-  question: string;
-};
-
-const RetrospectQuestionBlock = ({ type, value, onChange, question }: Props) => {
+const RetrospectQuestionBlock = ({ type, value, onChange, question }: QuestionBlockProps) => {
   switch (type) {
     case AnswerType.TEXT:
       return <TextAnswer value={value} onChange={onChange} />;

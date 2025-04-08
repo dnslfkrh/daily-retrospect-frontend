@@ -1,7 +1,7 @@
-import { GoalProps } from "./Props";
+import { GoalProps } from "./goal";
 
-export type Goal = {
+export interface GoalBlockProps {
   goal: GoalProps;
   onUpdate: (goal: GoalProps) => void;
   onDelete: (id: number) => void;
-};
+}

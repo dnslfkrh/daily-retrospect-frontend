@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import GoalBlock from "./GoalBlock";
-import { GoalProps } from "@/modules/goal/types/Props";
 import { fetchUpdateGoal } from "../services/fetchUpdateGoal";
 import { fetchDeleteGoal } from "../services/fetchDeleteGoal";
-
-type GoalListProps = {
-  goals: GoalProps[];
-};
+import { GoalListProps } from "../types/goal-list";
+import { GoalProps } from "../types/goal";
 
 const GoalList = ({ goals: initialGoals }: GoalListProps) => {
   const [goals, setGoals] = useState<GoalProps[]>(initialGoals);

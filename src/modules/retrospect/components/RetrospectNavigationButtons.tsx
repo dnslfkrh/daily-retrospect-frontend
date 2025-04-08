@@ -1,11 +1,6 @@
-type Props = {
-  onNext: () => void;
-  onSkip: () => void;
-  isLast: boolean;
-  disabled: boolean;
-};
+import { RetrospectNavProps } from "../types/retrospect-nav";
 
-const RetrospectNavigationButtons = ({ onNext, onSkip, isLast, disabled }: Props) => (
+const RetrospectNavigationButtons = ({ onNext, onSkip, isLast, disabled }: RetrospectNavProps) => (
   <>
     <button
       className="w-full max-w-lg mx-auto mt-4 p-2 rounded bg-black text-white hover:bg-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 disabled:opacity-50"

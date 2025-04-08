@@ -1,5 +1,5 @@
 import { api } from "@/common/services/api";
-import { UpdateSettingProps } from "../types/Props";
+import { UpdateSettingProps } from "../types/option";
 
 export const fetchUpdateSetting = async (setting: UpdateSettingProps) => {
   try {

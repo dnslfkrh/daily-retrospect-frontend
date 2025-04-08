@@ -1,8 +1,5 @@
 import { getFeedback } from "../constants/goalFeedback";
-
-interface GoalFeedbackProps {
-  averageScore: number;
-}
+import { GoalFeedbackProps } from "../types/goal-feedback";
 
 const GoalFeedback = ({ averageScore }: GoalFeedbackProps) => {
   if (averageScore <= 0) {

@@ -22,7 +22,7 @@ const CalendarScreen = () => {
 
   return (
     <div className="flex flex-col items-center p-4 mt-4">
-      <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 border border-gray-200 dark:border-gray-700" style={{ maxWidth: "336px" }}>
+      <div className="w-full bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" style={{ maxWidth: "336px" }}>
         <MonthNavigation currentMonth={currentMonth} onPrevMonth={handlePrevMonth} onNextMonth={handleNextMonth} />
         <DayOfWeek />
         <div className="grid grid-cols-7 gap-1 mt-2">
@@ -41,7 +41,7 @@ const CalendarScreen = () => {
       </div>
 
       {selectedDate && (
-        <div className="w-full bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md mt-6" style={{ maxWidth: "336px" }}>
+        <div className="w-full bg-white dark:bg-gray-800 p-5 rounded-lg mt-6" style={{ maxWidth: "336px" }}>
           <SelectedDateSummary selectedDate={selectedDate} summary={summary} />
         </div>
       )}

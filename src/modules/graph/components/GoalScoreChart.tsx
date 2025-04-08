@@ -82,7 +82,7 @@ const GoalScoreChart = ({ chartData, period = GoalEvaluationPeriod.OneMonth }: G
   };
 
   return (
-    <div className="p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md w-full">
+    <div className="p-4 bg-white dark:bg-gray-900 rounded-lg w-full">
       <div className="w-full h-64">
         <Line data={data} options={options} />
       </div>

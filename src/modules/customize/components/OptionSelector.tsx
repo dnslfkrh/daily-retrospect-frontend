@@ -23,7 +23,7 @@ export const OptionSelector = <T,>({
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className={`relative px-6 py-3 font-medium transition-all duration-200 rounded-full border
               ${selectedOption === option.value
-                ? "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-300 shadow-sm"
+                ? "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-300"
                 : "text-gray-600 dark:text-gray-400 border-transparent"
               }`}
           >

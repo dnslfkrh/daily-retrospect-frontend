@@ -76,7 +76,7 @@ const RetrospectCustomizeScreen = () => {
               onClick={handleSave}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="mt-10 mb-8 px-6 py-2 bg-black text-white rounded-lg shadow hover:bg-gray-800 transition dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
+              className="mt-10 mb-8 px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
             >
               저장
             </motion.button>

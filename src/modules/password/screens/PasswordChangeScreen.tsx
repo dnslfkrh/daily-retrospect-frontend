@@ -16,7 +16,7 @@ const PasswordChangeScreen = () => {
 
   return (
     <div className="flex flex-col items-center w-full p-4 pt-48">
-      <div className="w-[90%] max-w-md bg-gray-50 dark:bg-gray-800 shadow-md rounded-lg p-4">
+      <div className="w-[90%] max-w-md bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white text-center mb-4">
           비밀번호 변경
         </h2>

@@ -1,9 +1,7 @@
 import RetrospectScreen from "@/modules/retrospect/screens/RetrospectScreen";
 
 const RetrospectPage = () => {
-  return (
-    <RetrospectScreen />
-  );
+  return <RetrospectScreen />;
 };
 
 export default RetrospectPage;

@@ -1,9 +1,7 @@
 import GoalScreen from "@/modules/goal/screens/GoalScreen";
 
 const GoalPage = () => {
-  return (
-    <GoalScreen />
-  );
+  return <GoalScreen />;
 };
 
 export default GoalPage;

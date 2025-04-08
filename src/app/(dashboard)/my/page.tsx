@@ -1,11 +1,10 @@
 "user client";
 
-import MyPageView from "@/modules/my/screens/MyScreen";
+import MyScreen from "@/modules/my/screens/MyScreen";
+
 
 const MyPage = () => {
-  return (
-    <MyPageView />
-  );
+  return <MyScreen />;
 };
 
 export default MyPage;

@@ -1,9 +1,7 @@
 import CallbackScreen from "@/modules/auth/screens/CallbackScreen";
 
 const CallbackPage = () => {
-  return (
-    <CallbackScreen />
-  );
+  return <CallbackScreen />;
 };
 
 export default CallbackPage;

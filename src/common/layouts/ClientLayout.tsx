@@ -64,5 +64,4 @@ const ClientLayout = ({ children }: { children: ReactNode }) => {
   );
 }
 
-
 export default ClientLayout;

@@ -3,9 +3,7 @@
 import CalendarScreen from "@/modules/calendar/screens/CalendarScreen"
 
 const CalendarPage = () => {
-  return (
-    <CalendarScreen />
-  );
+  return <CalendarScreen />;
 };
 
 export default CalendarPage;

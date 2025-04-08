@@ -1,9 +1,7 @@
-import { RetrospectCustomizeScreen } from "@/modules/customize/screens/RetrospectCustomizeScreen";
+import RetrospectCustomizeScreen from "@/modules/customize/screens/RetrospectCustomizeScreen";
 
 const RetrospectSettingPage = () => {
-  return (
-    <RetrospectCustomizeScreen />
-  );
+  return <RetrospectCustomizeScreen />;
 };
 
 export default RetrospectSettingPage;

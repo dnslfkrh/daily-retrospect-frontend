@@ -2,6 +2,7 @@ import type { NextConfig } from 'next';
 import withPWA from 'next-pwa';
 
 const nextConfig: NextConfig = {
+  output: 'export',
   reactStrictMode: true,
   ...withPWA({
     dest: 'public',                                   // 서비스 워커 파일의 위치

@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { fetchDeleteAccount } from "../services/fetchDeleteAccount";
 import { handleLogout } from "@/shared/utils/logout";
+import { AxiosError } from "axios";
 
 const DeleteAccountScreen = () => {
   const [email, setEmail] = useState("");
@@ -24,9 +24,11 @@ const DeleteAccountScreen = () => {
       toast.success("회원 탈퇴가 완료되었습니다.");
       router.push("/auth");
       handleLogout();
-    } catch (error: any) {
-      console.error(error);
-      toast.error(error?.response?.data?.message || "탈퇴 중 오류가 발생했습니다.");
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        const errorMessage = error?.response?.data?.message || "탈퇴 중 오류가 발생했습니다.";
+        toast.error(errorMessage);
+      }
     } finally {
       setLoading(false);
     }

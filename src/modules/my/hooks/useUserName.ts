@@ -9,8 +9,13 @@ export const useUserName = () => {
       if (!idToken) return null;
 
       try {
-        const decoded: any = jwtDecode.decode(idToken);
-        return decoded?.name || "알 수 없는 사용자";
+        const decoded = jwtDecode.decode(idToken);
+
+        if (typeof decoded === "object" && decoded !== null && "name" in decoded) {
+          return (decoded as { name?: string }).name || "알 수 없는 사용자";
+        }
+
+        return "알 수 없는 사용자";
       } catch (error) {
         console.error("토큰 디코딩 오류:", error);
         return "알 수 없는 사용자";

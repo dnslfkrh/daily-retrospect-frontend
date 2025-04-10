@@ -10,7 +10,6 @@ interface FullHeightContainerProps {
 const FullHeightContainer: React.FC<FullHeightContainerProps> = ({ children }) => {
   const pathname = usePathname();
 
-  const hasBottomNav = pathname !== "/auth";
   const heightStyle = pathname === "/auth" ? "h-screen" : "h-[calc(100vh-72px)]";
 
   return (

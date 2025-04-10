@@ -3,13 +3,10 @@
 import { useUserName } from "../hooks/useUserName";
 import Link from "next/link";
 import CardGroup from "@/shared/components/CardGroup";
+import { handleLogout } from "@/shared/utils/logout";
 
 const MyScreen = () => {
   const userName = useUserName();
-
-  const handleLogout = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_COGNITO_LOGOUT_URL}`;
-  };
 
   return (
     <div className="p-6 bg-white dark:bg-gray-900 min-h-screen text-gray-800 dark:text-white">

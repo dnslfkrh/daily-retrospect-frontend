@@ -10,11 +10,17 @@ const MonthNavigation = ({ currentMonth, onPrevMonth, onNextMonth }: { currentMo
 
   return (
     <div className="flex justify-between items-center mb-4">
-      <button onClick={onPrevMonth} className="p-2 rounded-full hover:bg-gray-200">
+      <button
+        onClick={onPrevMonth}
+        className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-500/20"
+      >
         <ChevronLeft />
       </button>
       <h2 className="text-xl font-semibold">{`${format(currentMonth, "yyyy")}년 ${monthName}`}</h2>
-      <button onClick={onNextMonth} className="p-2 rounded-full hover:bg-gray-200 disabled:opacity-50">
+      <button
+        onClick={onNextMonth}
+        className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-500/20 disabled:opacity-50"
+      >
         <ChevronRight />
       </button>
     </div>

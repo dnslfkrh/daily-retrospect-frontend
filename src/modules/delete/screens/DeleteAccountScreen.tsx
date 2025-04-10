@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { fetchDeleteAccount } from "../services/fetchDeleteAccount";
+import { handleLogout } from "@/shared/utils/logout";
 
 const DeleteAccountScreen = () => {
   const [email, setEmail] = useState("");
@@ -22,8 +23,7 @@ const DeleteAccountScreen = () => {
       await fetchDeleteAccount(email);
       toast.success("회원 탈퇴가 완료되었습니다.");
       router.push("/auth");
-      localStorage.removeItem("accessToken");
-      document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+      handleLogout();
     } catch (error: any) {
       console.error(error);
       toast.error(error?.response?.data?.message || "탈퇴 중 오류가 발생했습니다.");

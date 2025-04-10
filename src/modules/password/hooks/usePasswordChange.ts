@@ -3,6 +3,7 @@ import { fetchChangePassword } from "../services/fetchChangePassword";
 import { fetchUserInfo } from "../services/fetchUserInfo";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
 
 export const usePasswordChange = () => {
   const [isSocialUser, setIsSocialUser] = useState<boolean | null>(null);
@@ -44,9 +45,13 @@ export const usePasswordChange = () => {
 
       toast.success("비밀번호가 성공적으로 변경되었습니다.");
       router.push("/my");
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || "비밀번호 변경에 실패했습니다. 다시 시도해주세요.";
-      setError(errorMessage);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        const errorMessage = error.response?.data?.message || "비밀번호 변경에 실패했습니다. 다시 시도해주세요.";
+        setError(errorMessage);
+      } else {
+        setError("예기치 못한 오류가 발생했습니다.");
+      }
     }
   };
 

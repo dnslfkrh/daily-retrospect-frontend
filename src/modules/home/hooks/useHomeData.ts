@@ -6,11 +6,13 @@ import { fetchGetGoalScores } from "@/shared/services/fetchGetGoalScores";
 import { fetchLastSummary } from "../services/fetchLastSummary";
 import { GoalEvaluationPeriod } from "@/shared/enums/goalEvaluation";
 import { GoalScoreProps } from "@/modules/graph/types/goal-score";
+import { SessionData } from "../types/session-date.type";
+import { Goal } from "../types/goal.type";
 
 export const useHomeData = () => {
   const [loading, setLoading] = useState(true);
-  const [session, setSession] = useState<any>(null);
-  const [goals, setGoals] = useState<any[]>([]);
+  const [session, setSession] = useState<SessionData | null>(null);
+  const [goals, setGoals] = useState<Goal[]>([]);
   const [retrospectDates, setRetrospectDates] = useState<string[]>([]);
   const [goalScores, setGoalScores] = useState<GoalScoreProps[]>([]);
   const [lastSummary, setLastSummary] = useState<string>("");

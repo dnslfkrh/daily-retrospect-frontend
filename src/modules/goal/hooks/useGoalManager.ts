@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchActivatedGoals } from "../../../shared/services/fetchActivatedGoals";
 import { fetchFinishedGoals } from "../services/fetchFinishedGoals";
 import { fetchCreateGoal } from "../services/fetchCreateGoal";
-import { GoalProps } from "../types/Props";
+import { GoalProps } from "../types/goal";
 
 export const useGoalManager = () => {
   const [goals, setGoals] = useState<GoalProps[]>([]);

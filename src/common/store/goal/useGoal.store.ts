@@ -1,12 +1,12 @@
-import { Goal } from '@/modules/goal/types/Props';
+import { GoalProps } from '@/modules/goal/types/goal';
 import { create } from 'zustand';
 
 interface GoalState {
-  goals: Goal[];
-  addGoal: (goal: Goal) => void;
-  updateGoal: (updatedGoal: Goal) => void;
+  goals: GoalProps[];
+  addGoal: (goal: GoalProps) => void;
+  updateGoal: (updatedGoal: GoalProps) => void;
   deleteGoal: (id: number) => void;
-  setGoals: (goals: Goal[]) => void;
+  setGoals: (goals: GoalProps[]) => void;
 }
 
 export const useGoalStore = create<GoalState>((set) => ({
@@ -28,7 +28,7 @@ export const useGoalStore = create<GoalState>((set) => ({
   }),
 }));
 
-const removeCreatedAt = (goal: any) => {
-  const { created_at, ...filteredGoal } = goal;
+const removeCreatedAt = (goal: GoalProps): GoalProps => {
+  const { ...filteredGoal } = goal;
   return filteredGoal;
 };

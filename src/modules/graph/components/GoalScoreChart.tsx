@@ -1,6 +1,5 @@
 "use client";
 import { Line } from "react-chartjs-2";
-import { GoalEvaluationPeriod } from "../../../shared/enums/goalEvaluation";
 import { useTheme } from "next-themes";
 import {
   Chart as ChartJS,
@@ -13,15 +12,11 @@ import {
   Legend,
   ChartOptions,
 } from "chart.js";
+import { GoalScoreChartProps } from "../types/goal-score-chart.type";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-interface GoalScoreChartProps {
-  chartData: { labels: string[]; data: number[] };
-  period?: GoalEvaluationPeriod;
-}
-
-const GoalScoreChart = ({ chartData, period = GoalEvaluationPeriod.OneMonth }: GoalScoreChartProps) => {
+const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
   const { labels, data: numericScores } = chartData;
   const { resolvedTheme } = useTheme();
 

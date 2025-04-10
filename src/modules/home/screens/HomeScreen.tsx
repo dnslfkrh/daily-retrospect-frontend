@@ -47,7 +47,7 @@ const HomeScreen = () => {
           <h2 className="text-md font-semibold text-gray-600 dark:text-gray-400 mb-2">회고</h2>
           <CardGroup>
             {[
-              <Link href="/retrospect">
+              <Link href="/retrospect" key="retrospect-link">
                 <div className="flex items-center">
                   <span className="mr-3">📝</span>
                   {isWrittenToday ? "오늘 회고를 이미 작성했어요." : "오늘 회고를 작성해보세요."}
@@ -61,7 +61,7 @@ const HomeScreen = () => {
         <div>
           <h2 className="text-md font-semibold text-gray-600 dark:text-gray-400 mb-2">목표</h2>
           <CardGroup>
-            <Link href="/goal">
+            <Link href="/goal" key="retrospect-link">
               <div className="flex items-center">
                 <span className="mr-3">🎯</span>
                 {ongoingGoals.length
@@ -85,14 +85,14 @@ const HomeScreen = () => {
         <div>
           <h2 className="text-md font-semibold text-gray-600 dark:text-gray-400 mb-2">캘린더</h2>
           <CardGroup>
-            <Link href="/my/calendar">
+            <Link href="/my/calendar" key="retrospect-link">
               <div className="flex items-center">
                 <span className="mr-3">📅</span>
                 지금까지 {retrospectDates.length}일 회고를 작성했어요.
               </div>
             </Link>
 
-            <Link href="/my/calendar">
+            <Link href="/my/calendar" key="retrospect-link">
               <div className="flex items-center">
                 <span className="mr-3">🔥</span>
                 {consecutiveDays > 0
@@ -101,7 +101,7 @@ const HomeScreen = () => {
               </div>
             </Link>
 
-            <Link href="/my/calendar">
+            <Link href="/my/calendar" key="retrospect-link">
               <div className="flex items-center">
                 <span className="mr-3">🧠</span>
                 {lastSummary?.trim().length
@@ -119,7 +119,7 @@ const HomeScreen = () => {
           <h2 className="text-md font-semibold text-gray-600 dark:text-gray-400 mb-2">점수</h2>
           <CardGroup>
             {[
-              <Link href="/my/graph">
+              <Link href="/my/graph" key="retrospect-link">
                 <div className="flex items-center">
                   <span className="mr-3">📊</span>
                   {averageScore

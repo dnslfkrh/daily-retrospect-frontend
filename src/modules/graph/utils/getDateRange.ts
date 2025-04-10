@@ -1,6 +1,6 @@
 export const getDateRange = (period: '1m' | '3m' | '6m' | '1y') => {
   const now = new Date();
-  let startDate = new Date();
+  const startDate = new Date();
 
   switch (period) {
     case '1m': startDate.setMonth(now.getMonth() - 1); break;

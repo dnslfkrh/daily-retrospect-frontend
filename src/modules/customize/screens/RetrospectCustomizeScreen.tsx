@@ -40,6 +40,7 @@ const RetrospectCustomizeScreen = () => {
       toast.success("설정이 저장되었습니다.");
     } catch (error) {
       toast.error("설정 저장에 실패했습니다.");
+      console.log(error);
     }
   };
 

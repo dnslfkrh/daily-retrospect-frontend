@@ -45,7 +45,7 @@ export const processScoresForChart = (
   const data: number[] = [];
 
   sortedKeys.forEach(key => {
-    const [year, month, week] = key.split("-");
+    const [month, week] = key.split("-");
     let label = "";
     switch (period) {
       case GoalEvaluationPeriod.OneMonth:

@@ -3,6 +3,7 @@ import "./globals.css";
 import ClientLayout from "@/common/layouts/ClientLayout";
 import { ThemeProvider } from "next-themes";
 import Script from "next/script";
+import AutoLogin from "@/common/components/AutoLogin";
 
 export const viewport = {
   themeColor: "#ffffff",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased bg-white text-black min-h-screen flex justify-center" suppressHydrationWarning>
         <Script src="/env.js" strategy="beforeInteractive" />
+        <AutoLogin />
         <div className="w-full max-w-[450px] min-h-screen relative">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ClientLayout>{children}</ClientLayout>

@@ -1,15 +1,16 @@
 "use client";
 
+import { config } from "@/common/libs/config";
 import { useRouter } from "next/navigation";
 
 export const useCognitoLogin = () => {
   const router = useRouter();
 
   const login = () => {
-    const REGION = process.env.NEXT_PUBLIC_AWS_REGION;
-    const COGNITO_DOMAIN = process.env.NEXT_PUBLIC_COGNITO_DOMAIN;
-    const CLIENT_ID = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID;
-    const REDIRECT_URI = process.env.NEXT_PUBLIC_COGNITO_CALLBACK_URL;
+    const REGION = config.awsRegion;
+    const COGNITO_DOMAIN = config.cognitoDomain;
+    const CLIENT_ID = config.cognitoClientId;
+    const REDIRECT_URI = config.cognitoCallbackUrl;
 
     if (!REGION || !COGNITO_DOMAIN || !CLIENT_ID || !REDIRECT_URI) {
       console.error("환경 변수 값이 올바르게 설정되지 않았습니다.");

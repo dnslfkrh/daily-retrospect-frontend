@@ -1,7 +1,8 @@
 import axios from "axios"; // Next SSR에서는 axios 대신 fetch 사용
+import { config } from "../libs/config";
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+  baseURL: config.backendUrl,
   headers: {
     "Content-Type": "application/json",
   },
@@ -21,7 +22,7 @@ api.interceptors.request.use((config) => {
 async function refreshAccessToken() {
   try {
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/refresh`,
+      `${config.backendUrl}/auth/refresh`,
       {},
       { withCredentials: true }
     );
@@ -37,7 +38,9 @@ async function refreshAccessToken() {
 
 // 응답 인터셉터 (401 에러 시 리프레시 후 재시도)
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    return response;
+  },
   async (error) => {
     const originalRequest = error.config;
 
@@ -49,13 +52,14 @@ api.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return api(originalRequest);
       } catch (refreshError) {
-        console.warn("리프레시 토큰도 만료됨, 로그인 필요");
-        console.error(refreshError);
+        console.warn("리프레시 토큰도 만료됨, 로그인 필요", refreshError);
         localStorage.removeItem("access_token");
         if (window.location.pathname !== "/auth") {
           window.location.href = "/auth";
         }
       }
+    } else {
+      console.error("Response Interceptor: 응답 에러", error);
     }
 
     return Promise.reject(error);

@@ -8,7 +8,6 @@ import { useTheme } from "next-themes";
 
 const TopNav = dynamic(() => import("@/common/layouts/TopNav"), { ssr: false });
 const BottomNav = dynamic(() => import("@/common/layouts/BottomNav"), { ssr: false });
-const Loading = dynamic(() => import("@/common/components/Loading"), { ssr: false });
 
 const ClientLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
@@ -40,7 +39,6 @@ const ClientLayout = ({ children }: { children: ReactNode }) => {
 
       <div className={`flex flex-col flex-grow pb-19 ${pathname === "/auth" ? "" : "mt-14"}`}>
         {children}
-        <Loading />
       </div>
 
       <BottomNav />

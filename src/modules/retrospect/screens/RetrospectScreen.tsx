@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import FullHeightContainer from "@/common/components/FullHeightContainer";
-import LoadingText from "@/common/components/LoadingText";
 import GoalListBlock from "../components/GoalListBlock";
 import RetrospectNavigationButtons from "../components/RetrospectNavigationButtons";
 import RetrospectQuestionBlock from "../components/RetrospectQuestionBlock";
@@ -13,7 +12,9 @@ const RetrospectScreen = () => {
   const { session, answers, setAnswers } = useRetrospectSession();
   const { currentIndex, handleAnswerChange, handleNavigation } = useRetrospectNavigation(session, answers);
 
-  if (!session) return <LoadingText />;
+  if (!session) {
+    return null;
+  }
 
   const currentQuestion = session.questions[currentIndex];
   const isGoalQuestion = currentQuestion.concept === "goal";

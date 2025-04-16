@@ -1,5 +1,4 @@
 import { X } from "lucide-react";
-import { ImageData } from "../types/image-data.type";
 import { ImageSlideProps } from "../types/image-slide.type";
 
 const ImageSlide = ({ image, onRemove, onChangeDesc }: ImageSlideProps) => {

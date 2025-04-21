@@ -16,6 +16,8 @@ const HomeScreen = () => {
     numberOfImages,
   } = useHomeData();
 
+  console.log("lastSummary:", lastSummary, typeof lastSummary);
+
   const today = new Date();
   const isWrittenToday = !!session?.answers?.length;
 
@@ -108,11 +110,13 @@ const HomeScreen = () => {
               <Link href="/my/calendar" key="retrospect-link">
                 <div className="flex items-center">
                   <span className="mr-3">🧠</span>
-                  {lastSummary?.trim().length
-                    ? lastSummary.length > 80
-                      ? `${lastSummary.slice(0, 80)}...`
-                      : lastSummary
-                    : "최근 회고 요약이 없어요."}
+                  {
+                    lastSummary && lastSummary.trim().length > 0
+                      ? lastSummary.trim().length > 20
+                        ? `최근 요약: ${lastSummary.trim().slice(0, 20)}...`
+                        : lastSummary.trim()
+                      : "최근 회고 요약이 없어요."
+                  }
                 </div>
               </Link>
             </CardGroup>

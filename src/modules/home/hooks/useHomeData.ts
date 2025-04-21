@@ -37,7 +37,7 @@ export const useHomeData = () => {
         setGoals(goalsData);
         setRetrospectDates(datesData);
         setGoalScores(scoresData);
-        setLastSummary(summaryData);
+        setLastSummary(summaryData.summary);
         setNumberOfImages(numberOfImagesData);
       } catch (error) {
         console.error("HomeScreen fetch error:", error);

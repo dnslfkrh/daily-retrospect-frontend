@@ -8,6 +8,7 @@ import { GoalEvaluationPeriod } from "@/shared/enums/goalEvaluation";
 import { GoalScoreProps } from "@/modules/graph/types/goal-score";
 import { SessionData } from "../types/session-date.type";
 import { Goal } from "../types/goal.type";
+import { fetchNumberOfImages } from "../services/fetchNumberOfImages";
 
 export const useHomeData = () => {
   const [loading, setLoading] = useState(true);
@@ -16,17 +17,19 @@ export const useHomeData = () => {
   const [retrospectDates, setRetrospectDates] = useState<string[]>([]);
   const [goalScores, setGoalScores] = useState<GoalScoreProps[]>([]);
   const [lastSummary, setLastSummary] = useState<string>("");
+  const [numberOfImages, setNumberOfImages] = useState<number>(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [sessionData, goalsData, datesData, scoresData, summaryData] = await Promise.all(
+        const [sessionData, goalsData, datesData, scoresData, summaryData, numberOfImagesData] = await Promise.all(
           [
             fetchSession(),
             fetchActivatedGoals(),
             fetchRetrospectDates(),
             fetchGetGoalScores(GoalEvaluationPeriod.OneMonth),
             fetchLastSummary(),
+            fetchNumberOfImages(),
           ]
         );
 
@@ -34,7 +37,8 @@ export const useHomeData = () => {
         setGoals(goalsData);
         setRetrospectDates(datesData);
         setGoalScores(scoresData);
-        setLastSummary(summaryData);
+        setLastSummary(summaryData.summary);
+        setNumberOfImages(numberOfImagesData);
       } catch (error) {
         console.error("HomeScreen fetch error:", error);
       } finally {
@@ -52,5 +56,6 @@ export const useHomeData = () => {
     retrospectDates,
     goalScores,
     lastSummary,
+    numberOfImages
   };
 };

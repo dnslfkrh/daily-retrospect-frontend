@@ -2,7 +2,7 @@ import { api } from "@/common/services/api";
 import { GoalProps } from "../types/goal";
 
 export const fetchUpdateGoal = async (updatedGoal: GoalProps) => {
-  const { ...filteredGoal } = updatedGoal;
+  const { created_at, ...filteredGoal } = updatedGoal;
   try {
     const response = await api.put("/goal/update", filteredGoal);
     return response.data;

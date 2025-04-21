@@ -24,7 +24,7 @@ const PasswordChangeScreen = () => {
         {isSocialUser === null ? (
           <p className="text-center text-gray-500 dark:text-gray-400">사용자 유형 확인 중..</p>
         ) : isSocialUser ? (
-          <p className="text-center text-red-500">
+          <p className="text-center text-lg text-red-500">
             소셜 로그인 사용자는 비밀번호를 변경할 수 없습니다.
           </p>
         ) : (

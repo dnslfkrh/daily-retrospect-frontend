@@ -2,7 +2,7 @@ import { api } from "@/common/services/api";
 
 export const fetchUserInfo = async () => {
   try {
-    const response = await api.get("auth/user-info");
+    const response = await api.get("user/user-info");
     return response.data;
   } catch (error) {
     console.error("Error fetching user info:", error);

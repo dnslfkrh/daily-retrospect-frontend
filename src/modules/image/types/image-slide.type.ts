@@ -1,4 +1,4 @@
-import { ImageData } from "./image-data.type";
+import { ImageData } from "../../../shared/types/image-data.type";
 
 export interface ImageSlideProps {
   image: ImageData;

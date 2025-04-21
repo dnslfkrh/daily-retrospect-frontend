@@ -6,7 +6,9 @@ export const useUserName = () => {
 
   useEffect(() => {
     const getUserNameFromToken = (idToken: string | null): string | null => {
-      if (!idToken) return null;
+      if (!idToken) {
+        return null;
+      }
 
       try {
         const decoded = jwtDecode.decode(idToken);

@@ -23,13 +23,17 @@ export const useCalendar = () => {
   };
 
   const handleNextMonth = () => {
-    if (isSameMonth(currentMonth, new Date())) return;
+    if (isSameMonth(currentMonth, new Date())) {
+      return;
+    }
     setSelectedDate(null);
     setCurrentMonth(addMonths(currentMonth, 1));
   };
 
   const handleDateClick = async (date: Date) => {
-    if (!retrospectDates.some(d => isSameDay(d, date))) return;
+    if (!retrospectDates.some(d => isSameDay(d, date))) {
+      return;
+    }
     setSelectedDate(date);
     const summaryData = await fetchSummary(date);
     setSummary(summaryData);

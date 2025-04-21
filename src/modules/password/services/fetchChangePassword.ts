@@ -2,7 +2,7 @@ import { api } from "@/common/services/api"
 
 export const fetchChangePassword = async (previousPassword: string, newPassword: string) => {
   try {
-    const response = await api.post("auth/change-password", {
+    const response = await api.post("user/change-password", {
       previousPassword,
       newPassword,
     });

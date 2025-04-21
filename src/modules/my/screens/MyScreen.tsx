@@ -56,6 +56,20 @@ const MyScreen = () => {
           </CardGroup>
         </div>
 
+        {/* 이미지 그룹 */}
+        <div>
+          <h2 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">목표</h2>
+          <CardGroup>
+            {[
+              <Link href="/my/gallery" key="image">
+                <div className="flex items-center">
+                  <span className="mr-3">📸</span> 이미지 갤러리 보기
+                </div>
+              </Link>,
+            ]}
+          </CardGroup>
+        </div>
+
         {/* 회원 기능 그룹 */}
         <div>
           <h2 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">회원 기능</h2>

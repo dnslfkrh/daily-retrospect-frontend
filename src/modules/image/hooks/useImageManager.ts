@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { fetchTodayImages } from "../services/fetchTodayImages";
-import { ImageData } from "../types/image-data.type";
-import { useLoadingStore } from "@/common/store/ui/useLoading.store";
+import { ImageData } from "../../../shared/types/image-data.type";
+import { compressImage } from "../utils/compressImage";
 
 export const useImageManager = () => {
   const [images, setImages] = useState<ImageData[]>([]);
+  const [hadExistingImages, setHadExistingImages] = useState(false);
   const MAX_IMAGES = 3;
 
   useEffect(() => {
@@ -22,6 +23,9 @@ export const useImageManager = () => {
               s3_key: item.s3_key,
             }))
           );
+          if (data.length > 0) {
+            setHadExistingImages(true);
+          }
         }
       } catch (error) {
         console.error(error);
@@ -35,10 +39,13 @@ export const useImageManager = () => {
     };
   }, []);
 
-  const handleAddImage = (file: File) => {
+  const handleAddImage = async (file: File) => {
     if (images.length >= MAX_IMAGES) return;
-    const url = URL.createObjectURL(file);
-    setImages((prev) => [...prev, { file, url, description: "", s3_key: "" }]);
+
+    const compressedFile = await compressImage(file);
+
+    const url = URL.createObjectURL(compressedFile);
+    setImages((prev) => [...prev, { file: compressedFile, url, description: "", s3_key: "" }]);
   };
 
   const removeImage = (index: number) => {
@@ -51,5 +58,5 @@ export const useImageManager = () => {
     );
   };
 
-  return { images, handleAddImage, removeImage, updateDescription };
+  return { images, handleAddImage, removeImage, updateDescription, hadExistingImages, setHadExistingImages };
 };

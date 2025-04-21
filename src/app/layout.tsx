@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import Script from "next/script";
 import AutoLogin from "@/common/components/AutoLogin";
 import ThemeHeader from "@/common/components/ThemeHeader";
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 export const viewport = {
   themeColor: "#ffffff",

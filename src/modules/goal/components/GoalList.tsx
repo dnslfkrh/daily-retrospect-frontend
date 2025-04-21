@@ -14,13 +14,11 @@ const GoalList = ({ goals: initialGoals }: GoalListProps) => {
 
   const handleUpdate = async (updatedGoal: GoalProps) => {
     await fetchUpdateGoal(updatedGoal);
-    console.log("Updated goal:", updatedGoal);
     setGoals((prevGoals) => prevGoals.map((goal) => (goal.id === updatedGoal.id ? updatedGoal : goal)));
   };
 
   const handleDelete = async (id: number) => {
     await fetchDeleteGoal(id);
-    console.log("Deleted goal with ID:", id);
     setGoals((prevGoals) => prevGoals.filter((goal) => goal.id !== id));
   };
 

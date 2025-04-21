@@ -19,10 +19,10 @@ export const useGoalEvaluation = (period: GoalEvaluationPeriod) => {
       try {
         const data = await fetchGetGoalScores(period);
         setScores(data.map(score => ({ ...score, answer: parseInt(String(score.answer), 10) })));
-      } catch (err) {
+      } catch (error) {
         setError("데이터를 불러오는 중 오류가 발생했습니다.");
         setScores([]);
-        console.error(err);
+        console.error(error);
       } finally {
         setIsLoading(false);
       }

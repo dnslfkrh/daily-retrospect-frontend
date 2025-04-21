@@ -52,7 +52,7 @@ const RetrospectCustomizeScreen = () => {
         animate={{ opacity: 1 }}
       >
         {loading ? (
-          <p className="text-gray-500 dark:text-gray-400">로딩 중...</p>
+          <p className="text-gray-500 dark:text-gray-400">불러오는 중..</p>
         ) : (
           <div className="w-full max-w-md flex flex-col items-center">
             <h1 className="text-xl font-semibold text-center text-black dark:text-gray-200 w-full mb-2">

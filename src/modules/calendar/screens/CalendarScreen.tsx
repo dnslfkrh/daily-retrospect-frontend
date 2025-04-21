@@ -22,6 +22,8 @@ const CalendarScreen = () => {
 
   return (
     <div className="flex flex-col items-center p-4 mt-4">
+      <h1 className="text-xl font-bold text-center mb-6">회고 작성 달력</h1>
+
       <div className="w-full bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700" style={{ maxWidth: "336px" }}>
         <MonthNavigation currentMonth={currentMonth} onPrevMonth={handlePrevMonth} onNextMonth={handleNextMonth} />
         <DayOfWeek />

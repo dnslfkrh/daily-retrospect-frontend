@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchTodayImages } from "../services/fetchTodayImages";
-import { ImageData } from "../types/image-data.type";
-import { useLoadingStore } from "@/common/store/ui/useLoading.store";
+import { ImageData } from "../../../shared/types/image-data.type";
 import { compressImage } from "../utils/compressImage";
 
 export const useImageManager = () => {

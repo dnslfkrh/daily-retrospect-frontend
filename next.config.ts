@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   ...withPWA({
     dest: 'public',                                   // 서비스 워커 파일의 위치
     register: true,                                   // 서비스 워커 자동 등록

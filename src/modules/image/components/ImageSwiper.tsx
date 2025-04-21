@@ -3,7 +3,7 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import ImageSlide from "./ImageSlide";
-import { ImageData } from "../types/image-data.type";
+import { ImageData } from "../../../shared/types/image-data.type";
 import { Plus } from "lucide-react";
 
 type Props = {

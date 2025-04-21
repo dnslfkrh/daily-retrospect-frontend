@@ -13,6 +13,7 @@ const HomeScreen = () => {
     retrospectDates,
     goalScores,
     lastSummary,
+    numberOfImages,
   } = useHomeData();
 
   const today = new Date();
@@ -114,6 +115,24 @@ const HomeScreen = () => {
                     : "최근 회고 요약이 없어요."}
                 </div>
               </Link>
+            </CardGroup>
+          </div>
+
+
+          {/* 이미지 그룹 */}
+          <div>
+            <h2 className="text-md font-semibold text-gray-600 dark:text-gray-400 mb-2">이미지</h2>
+            <CardGroup>
+              {[
+                <Link href="/my/gallery" key="image">
+                  <div className="flex items-center">
+                    <span className="mr-3">📸</span>
+                    {numberOfImages
+                      ? `${numberOfImages}장의 이미지가 갤러리에 있어요.`
+                      : "아직 업로드한 이미지가 없어요."}
+                  </div>
+                </Link>
+              ]}
             </CardGroup>
           </div>
 

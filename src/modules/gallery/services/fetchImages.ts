@@ -1,6 +1,6 @@
 import { api } from "@/common/services/api";
 
-export const fetchGalleryImages = async (page: number): Promise<{ file: File, imageData: string; description: string; contentType: string; s3_key: string, date: string }[]> => {
+export const fetchGalleryImages = async (page: number): Promise<{ url: string; description: string; date: string }[]> => {
   try {
     const response = await api.get(`/image/gallery?page=${page}`, {
       responseType: "json",

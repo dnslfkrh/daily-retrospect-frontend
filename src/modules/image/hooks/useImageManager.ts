@@ -17,10 +17,9 @@ export const useImageManager = () => {
         if (isMounted) {
           setImages(
             data.map((item) => ({
-              file: item.file,
-              url: item.imageData,
+              url: item.url,
               description: item.description,
-              s3_key: item.s3_key,
+              s3_key: item.s3_key
             }))
           );
           if (data.length > 0) {

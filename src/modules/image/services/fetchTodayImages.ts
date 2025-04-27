@@ -1,18 +1,17 @@
 import { api } from "@/common/services/api";
+import { ImageData } from "@/shared/types/image-data.type";
 
-export const fetchTodayImages = async (): Promise<{ file: File, imageData: string; description: string; contentType: string; s3_key: string }[]> => {
+export const fetchTodayImages = async (): Promise<ImageData[]> => {
   try {
     const response = await api.get("/image/today", {
       responseType: "json",
     });
 
-    return response.data.map((image: { id: string; contentType: string; data: string; description: string, s3_key: string }) => {
-      const imageData = `data:${image.contentType};base64,${image.data}`;
+    return response.data.map((image: ImageData) => {
       return {
-        imageData,
+        url: image.url,
         description: image.description,
-        contentType: image.contentType,
-        s3_key: image.s3_key,
+        s3_key: image.s3_key
       };
     });
   } catch (error) {

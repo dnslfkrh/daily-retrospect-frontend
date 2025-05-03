@@ -3,11 +3,13 @@ import { fetchActivatedGoals } from "../../../shared/services/fetchActivatedGoal
 import { fetchFinishedGoals } from "../services/fetchFinishedGoals";
 import { fetchCreateGoal } from "../services/fetchCreateGoal";
 import { GoalProps } from "../types/goal";
+import { useRouter } from "next/navigation";
 
 export const useGoalManager = () => {
   const [goals, setGoals] = useState<GoalProps[]>([]);
   const [finishedGoals, setFinishedGoals] = useState<GoalProps[]>([]);
   const [showCompleted, setShowCompleted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const loadGoals = async () => {
@@ -18,8 +20,8 @@ export const useGoalManager = () => {
   }, []);
 
   const addGoal = async (newGoal: GoalProps) => {
-    await fetchCreateGoal(newGoal);
-    setGoals((prev) => [...prev, { ...newGoal, id: prev.length + 1 }]);
+    const goal = await fetchCreateGoal(newGoal);
+    setGoals((prev) => [...prev, { ...newGoal, id: goal.id }]);
   };
 
   const toggleCompleted = async () => {

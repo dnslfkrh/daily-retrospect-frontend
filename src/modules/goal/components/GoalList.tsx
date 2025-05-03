@@ -4,9 +4,11 @@ import { fetchUpdateGoal } from "../services/fetchUpdateGoal";
 import { fetchDeleteGoal } from "../services/fetchDeleteGoal";
 import { GoalListProps } from "../types/goal-list";
 import { GoalProps } from "../types/goal";
+import { useRouter } from "next/navigation";
 
 const GoalList = ({ goals: initialGoals }: GoalListProps) => {
   const [goals, setGoals] = useState<GoalProps[]>(initialGoals);
+  const router = useRouter();
 
   useEffect(() => {
     setGoals(initialGoals);

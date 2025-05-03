@@ -9,10 +9,11 @@ import { GoalScoreProps } from "@/modules/graph/types/goal-score";
 import { SessionData } from "../types/session-date.type";
 import { Goal } from "../types/goal.type";
 import { fetchNumberOfImages } from "../services/fetchNumberOfImages";
+import { fetchCheckTodaySession } from "../services/fetchCheckTodaySession";
 
 export const useHomeData = () => {
   const [loading, setLoading] = useState(true);
-  const [session, setSession] = useState<SessionData | null>(null);
+  const [session, setSession] = useState<boolean>();
   const [goals, setGoals] = useState<Goal[]>([]);
   const [retrospectDates, setRetrospectDates] = useState<string[]>([]);
   const [goalScores, setGoalScores] = useState<GoalScoreProps[]>([]);
@@ -24,7 +25,7 @@ export const useHomeData = () => {
       try {
         const [sessionData, goalsData, datesData, scoresData, summaryData, numberOfImagesData] = await Promise.all(
           [
-            fetchSession(),
+            fetchCheckTodaySession(),
             fetchActivatedGoals(),
             fetchRetrospectDates(),
             fetchGetGoalScores(GoalEvaluationPeriod.OneMonth),

@@ -40,7 +40,7 @@ const DeleteAccountScreen = () => {
       <p className="text-sm mb-6 text-muted-foreground">
         탈퇴 시 모든 데이터가 삭제되며 복구할 수 없습니다.
         <br />
-        가입 시 사용한 이메일을 입력해주세요.
+        가입 시 사용한 이메일을 입력해 주세요.
       </p>
 
       <input

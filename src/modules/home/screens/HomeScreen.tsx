@@ -16,10 +16,8 @@ const HomeScreen = () => {
     numberOfImages,
   } = useHomeData();
 
-  console.log("lastSummary:", lastSummary, typeof lastSummary);
-
   const today = new Date();
-  const isWrittenToday = !!session?.answers?.length;
+  const isWrittenToday = session;
 
   const ongoingGoals = goals
     .filter((goal) => {
@@ -42,13 +40,12 @@ const HomeScreen = () => {
 
   return (
     <div className="p-6 bg-white dark:bg-gray-900 min-h-screen text-gray-800 dark:text-white">
-      <h1 className="text-xl font-bold mb-6">명언 한줄 추가 ㄱㄱ</h1>
+      <h1 className="text-xl font-bold mb-6">나의 현황</h1>
 
       {loading ? (
         <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">불러오는 중...</p>
       ) : (
         <div className="space-y-8">
-          {/* 회고 그룹 */}
           <div>
             <h2 className="text-md font-semibold text-gray-600 dark:text-gray-400 mb-2">회고</h2>
             <CardGroup>
@@ -56,18 +53,17 @@ const HomeScreen = () => {
                 <Link href="/retrospect" key="retrospect-link">
                   <div className="flex items-center">
                     <span className="mr-3">📝</span>
-                    {isWrittenToday ? "오늘 회고를 이미 작성했어요." : "오늘 회고를 작성해보세요."}
+                    {isWrittenToday ? "오늘 회고를 이미 작성했어요." : "오늘 회고를 작성해 보세요."}
                   </div>
-                </Link>
+                </Link>,
               ]}
             </CardGroup>
           </div>
 
-          {/* 목표 그룹 */}
           <div>
             <h2 className="text-md font-semibold text-gray-600 dark:text-gray-400 mb-2">목표</h2>
             <CardGroup>
-              <Link href="/goal" key="retrospect-link">
+              <Link href="/goal">
                 <div className="flex items-center">
                   <span className="mr-3">🎯</span>
                   {ongoingGoals.length
@@ -87,18 +83,17 @@ const HomeScreen = () => {
             </CardGroup>
           </div>
 
-          {/* 캘린더 그룹 */}
           <div>
             <h2 className="text-md font-semibold text-gray-600 dark:text-gray-400 mb-2">캘린더</h2>
             <CardGroup>
-              <Link href="/my/calendar" key="retrospect-link">
+              <Link href="/my/calendar">
                 <div className="flex items-center">
                   <span className="mr-3">📅</span>
                   지금까지 {retrospectDates.length}일 회고를 작성했어요.
                 </div>
               </Link>
 
-              <Link href="/my/calendar" key="retrospect-link">
+              <Link href="/my/calendar">
                 <div className="flex items-center">
                   <span className="mr-3">🔥</span>
                   {consecutiveDays > 0
@@ -107,23 +102,19 @@ const HomeScreen = () => {
                 </div>
               </Link>
 
-              <Link href="/my/calendar" key="retrospect-link">
+              <Link href="/my/calendar">
                 <div className="flex items-center">
                   <span className="mr-3">🧠</span>
-                  {
-                    lastSummary && lastSummary.trim().length > 0
-                      ? lastSummary.trim().length > 20
-                        ? `최근 요약: ${lastSummary.trim().slice(0, 20)}...`
-                        : lastSummary.trim()
-                      : "최근 회고 요약이 없어요."
-                  }
+                  {lastSummary && lastSummary.trim().length > 0
+                    ? lastSummary.trim().length > 20
+                      ? `최근 요약: ${lastSummary.trim().slice(0, 20)}...`
+                      : lastSummary.trim()
+                    : "최근 회고 요약이 없어요."}
                 </div>
               </Link>
             </CardGroup>
           </div>
 
-
-          {/* 이미지 그룹 */}
           <div>
             <h2 className="text-md font-semibold text-gray-600 dark:text-gray-400 mb-2">이미지</h2>
             <CardGroup>
@@ -135,12 +126,11 @@ const HomeScreen = () => {
                       ? `${numberOfImages}장의 이미지가 갤러리에 있어요.`
                       : "아직 업로드한 이미지가 없어요."}
                   </div>
-                </Link>
+                </Link>,
               ]}
             </CardGroup>
           </div>
 
-          {/* 점수 그룹 */}
           <div>
             <h2 className="text-md font-semibold text-gray-600 dark:text-gray-400 mb-2">점수</h2>
             <CardGroup>
@@ -152,7 +142,7 @@ const HomeScreen = () => {
                       ? `평균 점수는 ${averageScore}점입니다.`
                       : "아직 목표 평가 점수가 없어요."}
                   </div>
-                </Link>
+                </Link>,
               ]}
             </CardGroup>
           </div>

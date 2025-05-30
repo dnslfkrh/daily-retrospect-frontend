@@ -12,7 +12,7 @@ const NameChangeScreen = () => {
 
   const handleChangeName = async () => {
     if (!newName.trim()) {
-      toast.error("새 이름을 입력해주세요.");
+      toast.error("새 이름을 입력해 주세요.");
       return;
     }
 

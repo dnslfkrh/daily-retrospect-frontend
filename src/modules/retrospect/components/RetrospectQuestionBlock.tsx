@@ -4,6 +4,7 @@ import ScoreAnswer from "./ScoreAnswer";
 import SingleChoiceAnswer from "./SingleChoiceAnswer";
 import { AnswerType } from "../enums/retrospect.enum";
 import { QuestionBlockProps } from "../types/question-block";
+import TimeAnswer from "./TimeAnswer";
 
 const RetrospectQuestionBlock = ({ type, value, onChange, question }: QuestionBlockProps) => {
   switch (type) {
@@ -13,6 +14,8 @@ const RetrospectQuestionBlock = ({ type, value, onChange, question }: QuestionBl
       return <ScoreAnswer value={value} onChange={onChange} />;
     case AnswerType.SINGLE_CHOICE:
       return <SingleChoiceAnswer question={question} value={value} onSelect={onChange} />;
+    case AnswerType.TIME:
+      return <TimeAnswer value={value} onChange={onChange} />;
     default:
       return null;
   }

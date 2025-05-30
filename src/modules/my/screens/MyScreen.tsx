@@ -58,7 +58,7 @@ const MyScreen = () => {
 
         {/* 이미지 그룹 */}
         <div>
-          <h2 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">목표</h2>
+          <h2 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">이미지</h2>
           <CardGroup>
             {[
               <Link href="/my/gallery" key="image">
@@ -75,6 +75,11 @@ const MyScreen = () => {
           <h2 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">회원 기능</h2>
           <CardGroup>
             {[
+              <Link href="/my/name" key="password">
+                <div className="flex items-center">
+                  <span className="mr-3">🕺</span> 이름 변경하기
+                </div>
+              </Link>,
               <Link href="/my/password" key="password">
                 <div className="flex items-center">
                   <span className="mr-3">🔒</span> 비밀번호 변경하기

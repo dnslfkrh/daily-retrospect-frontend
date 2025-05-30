@@ -1,32 +1,21 @@
 import { useEffect, useState } from "react";
-import jwtDecode from "jsonwebtoken";
+import { fetchUserName } from "../services/fetchUserName";
 
 export const useUserName = () => {
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
-    const getUserNameFromToken = (idToken: string | null): string | null => {
-      if (!idToken) {
-        return null;
-      }
-
+    const fetchName = async () => {
       try {
-        const decoded = jwtDecode.decode(idToken);
-
-        if (typeof decoded === "object" && decoded !== null && "name" in decoded) {
-          return (decoded as { name?: string }).name || "알 수 없는 사용자";
-        }
-
-        return "알 수 없는 사용자";
+        const data = await fetchUserName();
+        console.log("사용자 이름 데이터:", data);
+        setUserName(data || "알 수 없는 사용자");
       } catch (error) {
-        console.error("토큰 디코딩 오류:", error);
-        return "알 수 없는 사용자";
+        setUserName("알 수 없는 사용자");
       }
     };
 
-    const idToken = localStorage.getItem("id_token");
-    const name = getUserNameFromToken(idToken);
-    setUserName(name);
+    fetchName();
   }, []);
 
   return userName;

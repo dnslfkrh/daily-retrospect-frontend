@@ -10,6 +10,7 @@ const GalleryScreen = () => {
   const [flippedIndexes, setFlippedIndexes] = useState<Set<number>>(new Set());
   const [canLoadMore, setCanLoadMore] = useState(true);
   const lastLoadTimeRef = useRef<number>(Date.now());
+  const columnRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
     const loadImages = async () => {
@@ -64,56 +65,115 @@ const GalleryScreen = () => {
   return (
     <div onScroll={handleScroll} className="gallery-container" style={{ height: "100vh", overflowY: "auto" }}>
       <h1 className="text-2xl font-bold text-center mb-8">갤러리</h1>
-      <div className="columns-1 sm:columns-2 md:columns-2 gap-6 px-4">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className="card-container cursor-pointer rounded-lg mb-6 break-inside-avoid inline-block w-full"
-            onClick={() => handleFlip(index)}
-            style={{
-              perspective: "1500px",
-            }}
-          >
-            <div
-              className="card relative w-full h-full"
-              style={{
-                transformStyle: "preserve-3d",
-                transition: "transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)",
-                transform: flippedIndexes.has(index) ? "rotateY(180deg)" : "rotateY(0deg)",
-              }}
-            >
 
-              <div
-                className="w-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-                style={{
-                  backfaceVisibility: "hidden",
-                  WebkitBackfaceVisibility: "hidden",
-                }}
-              >
-                <img
-                  src={image.url}
-                  alt="Gallery image"
-                  className="w-full h-auto block border-4 border-white rounded-lg"
-                />
-              </div>
+      <div className="px-4">
+        <div className="masonry-layout flex gap-4">
+          <div className="masonry-column flex-1 flex flex-col gap-4">
+            {images.filter((_, i) => i % 2 === 0).map((image, columnIndex) => {
+              const globalIndex = columnIndex * 2;
+              return (
+                <div
+                  key={globalIndex}
+                  className="card-container cursor-pointer rounded-lg"
+                  onClick={() => handleFlip(globalIndex)}
+                  style={{ perspective: "1500px" }}
+                >
+                  <div
+                    className="card relative w-full"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transition: "transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)",
+                      transform: flippedIndexes.has(globalIndex) ? "rotateY(180deg)" : "rotateY(0deg)",
+                    }}
+                  >
+                    <div
+                      className="w-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+                      style={{
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
+                      }}
+                    >
+                      <img
+                        src={image.url}
+                        alt="Gallery image"
+                        className="w-full h-auto block border-4 border-white rounded-lg"
+                        loading="lazy"
+                      />
+                    </div>
 
-              <div
-                className="absolute top-0 left-0 w-full h-full rounded-lg overflow-hidden shadow-lg"
-                style={{
-                  backfaceVisibility: "hidden",
-                  WebkitBackfaceVisibility: "hidden",
-                  transform: "rotateY(180deg)",
-                }}
-              >
-                <div className="w-full h-full flex flex-col justify-center items-center p-6 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border-4 border-gray-200 dark:border-gray-700 rounded-lg">
-                  <p className="text-xl font-semibold mb-4">{image.date}</p>
-                  <p className="text-center">{image.description}</p>
+                    <div
+                      className="absolute top-0 left-0 w-full h-full rounded-lg overflow-hidden shadow-lg"
+                      style={{
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                      }}
+                    >
+                      <div className="w-full h-full flex flex-col justify-center items-center p-6 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border-4 border-gray-200 dark:border-gray-700 rounded-lg">
+                        <p className="text-xl font-semibold mb-4">{image.date}</p>
+                        <p className="text-center">{image.description}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
-        ))}
+          
+          <div className="masonry-column flex-1 flex flex-col gap-4">
+            {images.filter((_, i) => i % 2 === 1).map((image, columnIndex) => {
+              const globalIndex = columnIndex * 2 + 1;
+              return (
+                <div
+                  key={globalIndex}
+                  className="card-container cursor-pointer rounded-lg"
+                  onClick={() => handleFlip(globalIndex)}
+                  style={{ perspective: "1500px" }}
+                >
+                  <div
+                    className="card relative w-full"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transition: "transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)",
+                      transform: flippedIndexes.has(globalIndex) ? "rotateY(180deg)" : "rotateY(0deg)",
+                    }}
+                  >
+                    <div
+                      className="w-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+                      style={{
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
+                      }}
+                    >
+                      <img
+                        src={image.url}
+                        alt="Gallery image"
+                        className="w-full h-auto block border-4 border-white rounded-lg"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <div
+                      className="absolute top-0 left-0 w-full h-full rounded-lg overflow-hidden shadow-lg"
+                      style={{
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                      }}
+                    >
+                      <div className="w-full h-full flex flex-col justify-center items-center p-6 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border-4 border-gray-200 dark:border-gray-700 rounded-lg">
+                        <p className="text-xl font-semibold mb-4">{image.date}</p>
+                        <p className="text-center">{image.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
+
       {loading && <p className="text-center py-6 text-gray-600 dark:text-gray-300">이미지 불러오는 중..</p>}
       {!canLoadMore && images.length > 0 && <p className="text-center py-6 text-gray-600 dark:text-gray-300">마지막 이미지</p>}
     </div>

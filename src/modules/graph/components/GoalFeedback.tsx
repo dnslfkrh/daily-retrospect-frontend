@@ -2,7 +2,8 @@ import { getFeedback } from "../constants/goalFeedback";
 import { GoalFeedbackProps } from "../types/goal-feedback";
 
 const GoalFeedback = ({ averageScore }: GoalFeedbackProps) => {
-  if (averageScore <= 0) {
+  // averageScore가 null이면 렌더링하지 않음
+  if (averageScore === null || averageScore <= 0) {
     return null;
   }
 

@@ -16,7 +16,7 @@ const GoalEvaluationScreen = () => {
       <h2 className="text-2xl font-semibold mb-6 text-center">{period} 동안의 목표 점수</h2>
       <PeriodSelector period={period} setPeriod={setPeriod} />
       <GoalScoreChart chartData={chartData} period={period} />
-      {!isNaN(averageScore) && <GoalFeedback averageScore={averageScore} />}
+      {averageScore > 0 && <GoalFeedback averageScore={averageScore} />}
     </div>
   );
 };

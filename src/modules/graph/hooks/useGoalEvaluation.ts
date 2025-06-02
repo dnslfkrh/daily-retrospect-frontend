@@ -13,6 +13,10 @@ export const useGoalEvaluation = (period: GoalEvaluationPeriod) => {
   const [averageScore, setAverageScore] = useState(0);
 
   useEffect(() => {
+    // 기간 변경 시 상태 초기화
+    setChartData({ labels: [], data: [] });
+    setAverageScore(0);
+
     const fetchScores = async () => {
       setIsLoading(true);
       setError(null);
@@ -42,7 +46,7 @@ export const useGoalEvaluation = (period: GoalEvaluationPeriod) => {
         [GoalEvaluationPeriod.OneMonth]: 4,
         [GoalEvaluationPeriod.ThreeMonths]: 9,
         [GoalEvaluationPeriod.SixMonths]: 18,
-        [GoalEvaluationPeriod.OneYear]: 36,
+        [GoalEvaluationPeriod.OneYear]: 100,
       }[period];
 
       if (scoreCount < requiredCount) {
@@ -50,10 +54,11 @@ export const useGoalEvaluation = (period: GoalEvaluationPeriod) => {
           icon: "⚠️",
           id: "insufficient-score-warning", // 중복 방지
         });
+        setAverageScore(0); // 데이터 부족 시 평균 점수를 0으로 설정
       }
     } else {
       setChartData({ labels: [], data: [] });
-      setAverageScore(0);
+      setAverageScore(0); // 로딩 중이거나 오류가 있을 때도 평균 점수를 0으로 설정
     }
   }, [scores, period, isLoading, error]);
 

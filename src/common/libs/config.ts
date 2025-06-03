@@ -1,20 +1,20 @@
 export const config = {
   get backendUrl() {
-    return typeof window !== "undefined" && window.env?.NEXT_PUBLIC_BACKEND_URL || "";
+    return "https://api.myretrodaily.store"
   },
   get awsRegion() {
-    return typeof window !== "undefined" && window.env?.NEXT_PUBLIC_AWS_REGION || "";
+    return "ap-northeast-2"
   },
   get cognitoCallbackUrl() {
-    return typeof window !== "undefined" && window.env?.NEXT_PUBLIC_COGNITO_CALLBACK_URL || "";
+    return "https://api.myretrodaily.store/auth/cognito/callback"
   },
   get cognitoLogoutUrl() {
-    return typeof window !== "undefined" && window.env?.NEXT_PUBLIC_COGNITO_LOGOUT_URL || "";
+    return "https://api.myretrodaily.store/auth/cognito/logout"
   },
   get cognitoDomain() {
-    return typeof window !== "undefined" && window.env?.NEXT_PUBLIC_COGNITO_DOMAIN || "";
+    return "ap-northeast-29m3ycr9ny"
   },
   get cognitoClientId() {
-    return typeof window !== "undefined" && window.env?.NEXT_PUBLIC_COGNITO_CLIENT_ID || "";
+    return "53fuv9ej7sd3approg045ltc84"
   },
 };

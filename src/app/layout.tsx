@@ -22,7 +22,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className="antialiased bg-white text-black min-h-screen flex justify-center" suppressHydrationWarning>
-        <Script src="/env.js" strategy="beforeInteractive" />
         <AutoLogin />
         <div className="w-full max-w-[450px] min-h-screen relative">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

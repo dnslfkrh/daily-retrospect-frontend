@@ -27,7 +27,13 @@ const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
     setMounted(true);
   }, []);
 
-  if (!mounted || !resolvedTheme) {
+  if (
+    !mounted ||
+    !resolvedTheme ||
+    numericScores.length === 0 ||
+    numericScores.some(score => isNaN(score))
+  ) {
+    console.log("알 수 없음");
     return null;
   }
 

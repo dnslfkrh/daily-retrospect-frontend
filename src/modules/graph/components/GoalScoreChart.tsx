@@ -1,4 +1,6 @@
 "use client";
+
+import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { useTheme } from "next-themes";
 import {
@@ -19,6 +21,15 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
   const { labels, data: numericScores } = chartData;
   const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !resolvedTheme) {
+    return null;
+  }
 
   const isDarkMode = resolvedTheme === "dark";
 

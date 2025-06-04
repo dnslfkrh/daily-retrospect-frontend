@@ -60,13 +60,12 @@ export const processScoresForChart = (
   if (period === GoalEvaluationPeriod.OneMonth) {
     // 1개월: "1주, 2주, 3주, 4주" 레이블
     labels = ["1주", "2주", "3주", "4주"];
-    data = [0, 0, 0, 0];
-
-    // 데이터 매핑
+    data = [0, 0, 0, 0];    // 데이터 매핑
     Object.keys(aggregatedScores).forEach((key) => {
       const index = parseInt(key, 10) - 1; // 문자열 키를 숫자로 변환
       if (index >= 0 && index < 4) {
-        data[index] = aggregatedScores[key].sum / aggregatedScores[key].count;
+        data[index] = aggregatedScores[key].count > 0 ? 
+          aggregatedScores[key].sum / aggregatedScores[key].count : 0;
       }
     });
   } else {
@@ -76,7 +75,10 @@ export const processScoresForChart = (
       const [year, month] = key.split("-");
       return `${parseInt(month, 10)}월`; // "월" 형식
     });
-    data = sortedKeys.map((key) => aggregatedScores[key].sum / aggregatedScores[key].count);
+    data = sortedKeys.map((key) => (
+      aggregatedScores[key].count > 0 ? 
+        aggregatedScores[key].sum / aggregatedScores[key].count : 0
+    ));
   }
 
   const sumOfScores = allScores.reduce((sum, score) => sum + score, 0);

@@ -27,12 +27,12 @@ const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
   useEffect(() => {
     setMounted(true);
   }, []);
-
   if (
     !mounted ||
     !resolvedTheme ||
+    !numericScores ||
     numericScores.length === 0 ||
-    numericScores.some(score => isNaN(score))
+    numericScores.some(score => isNaN(score) || score === null || score === undefined)
   ) {
     return null;
   }
@@ -42,9 +42,7 @@ const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
   const borderColor = isDarkMode ? "#FFFFFF" : "#374151";
   const backgroundColor = isDarkMode ? "rgba(250, 204, 21, 0.2)" : "rgba(55, 65, 81, 0.2)";
   const textColor = isDarkMode ? "#F3F4F6" : "#374151";
-  const gridColor = isDarkMode ? "rgba(255, 255, 255, 0.2)" : "rgba(55, 65, 81, 0.2)";
-
-  const data = {
+  const gridColor = isDarkMode ? "rgba(255, 255, 255, 0.2)" : "rgba(55, 65, 81, 0.2)";  const data = {
     labels,
     datasets: [
       {
@@ -53,6 +51,7 @@ const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
         borderColor,
         backgroundColor,
         tension: 0.2,
+        cubicInterpolationMode: 'monotone' as const,
         pointRadius: numericScores.length > 30 ? 2 : 4,
         pointHoverRadius: 6,
         pointBackgroundColor: borderColor,
@@ -60,10 +59,14 @@ const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
       },
     ],
   };
-
   const options: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
+    elements: {
+      line: {
+        tension: 0.2
+      }
+    },
     scales: {
       y: {
         beginAtZero: true,
@@ -93,11 +96,20 @@ const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
       },
     },
   };
-
   return (
     <div className="p-4 bg-white dark:bg-gray-900 rounded-lg w-full">
       <div className="w-full h-64">
-        <Line data={data} options={options} />
+        {numericScores && numericScores.length > 0 ? (
+          <Line 
+            data={data} 
+            options={options}
+            fallbackContent={<div className="flex items-center justify-center h-full">차트를 표시할 수 없습니다.</div>}
+          />
+        ) : (
+          <div className="flex items-center justify-center h-full text-gray-500">
+            차트 데이터가 충분하지 않습니다.
+          </div>
+        )}
       </div>
     </div>
   );

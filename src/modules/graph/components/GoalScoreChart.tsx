@@ -11,12 +11,13 @@ import {
   LineElement,
   Title,
   Tooltip,
+  Filler,
   Legend,
   ChartOptions,
 } from "chart.js";
 import { GoalScoreChartProps } from "../types/goal-score-chart.type";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler, Legend);
 
 const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
   const { labels, data: numericScores } = chartData;
@@ -33,7 +34,6 @@ const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
     numericScores.length === 0 ||
     numericScores.some(score => isNaN(score))
   ) {
-    console.log("알 수 없음");
     return null;
   }
 
@@ -42,6 +42,7 @@ const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
   const borderColor = isDarkMode ? "#FFFFFF" : "#374151";
   const backgroundColor = isDarkMode ? "rgba(250, 204, 21, 0.2)" : "rgba(55, 65, 81, 0.2)";
   const textColor = isDarkMode ? "#F3F4F6" : "#374151";
+  const gridColor = isDarkMode ? "rgba(255, 255, 255, 0.2)" : "rgba(55, 65, 81, 0.2)";
 
   const data = {
     labels,
@@ -71,7 +72,7 @@ const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
           color: textColor,
         },
         grid: {
-          color: isDarkMode ? "rgba(255, 255, 255, 0.2)" : "rgba(55, 65, 81, 0.2)",
+          color: gridColor,
         },
       },
       x: {
@@ -80,7 +81,7 @@ const GoalScoreChart = ({ chartData }: GoalScoreChartProps) => {
           color: textColor,
         },
         grid: {
-          color: isDarkMode ? "rgba(255, 255, 255, 0.2)" : "rgba(55, 65, 81, 0.2)",
+          color: gridColor,
         },
       },
     },

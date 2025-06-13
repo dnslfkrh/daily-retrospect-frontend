@@ -1,5 +1,3 @@
-"use client";
-
 import GoalEvaluationScreen from '@/modules/graph/screens/GoalEvaluationScreen';
 
 export const metadata = {

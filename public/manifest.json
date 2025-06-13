@@ -1,7 +1,9 @@
 {
-  "name": "My PWA App",
-  "short_name": "PWA App",
-  "description": "This is a PWA built with Next.js",
+  "name": "myretrodaily",
+  "short_name": "myretrodaily",
+  "version": "1.0.0",
+  "lang": "ko",
+  "description": "질문 기반 회고 작성 PWA 애플리케이션",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

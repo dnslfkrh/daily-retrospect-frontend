@@ -9,6 +9,7 @@ export const useRetrospectNavigation = (
   answers: { [key: number]: string }
 ) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [animationDirection, setAnimationDirection] = useState<'next' | 'previous'>('next');
   const router = useRouter();
 
   const handleAnswerChange = (value: string) => {
@@ -23,6 +24,8 @@ export const useRetrospectNavigation = (
     if (!session) {
       return;
     }
+    
+    setAnimationDirection('next');
     const currentQuestion = session.questions[currentIndex];
     await fetchSaveAnswer({
       sessionId: session.id,
@@ -38,5 +41,12 @@ export const useRetrospectNavigation = (
     }
   };
 
-  return { currentIndex, handleAnswerChange, handleNavigation };
+  const handlePreviousNavigation = () => {
+    if (currentIndex > 0) {
+      setAnimationDirection('previous');
+      setCurrentIndex((prev) => prev - 1);
+    }
+  };
+
+  return { currentIndex, handleAnswerChange, handleNavigation, handlePreviousNavigation, animationDirection };
 };
